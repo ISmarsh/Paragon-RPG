@@ -15,6 +15,7 @@ export class AppComponent {
   title = 'paragon-rpg';
   
   hero = new Hero();
+  
   origins = Origins;
   alignments = Alignments;
   archetypes = Archetypes;
