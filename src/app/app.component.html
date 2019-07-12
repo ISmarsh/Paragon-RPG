@@ -1,0 +1,157 @@
+<div class="row pt-5">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="heroName">
+        {{hero.alignment ? hero.alignment.name : "Hero"}} Name
+      </label>
+      <input id="heroName" [(ngModel)]="hero.heroName" type="text" class="form-control" autofocus>
+    </div>
+  </div>
+  <div class="col-md-2">
+    <div class="form-group">
+      <label for="level">Level</label>
+      <input id="level" [(ngModel)]="hero.level" type="number" min="1" max="20" class="form-control">
+    </div>
+  </div>
+  <!-- <div class="col-md-1">
+    <button (click)="click()" class="btn btn-primary">Click</button>
+  </div> -->
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="card form-group">
+      <div class="card-header">
+        Origin:
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <select [(ngModel)]="hero.origin" class="form-control">
+            <option *ngFor="let option of origins" [ngValue]="option">{{option.name}}</option>
+          </select>
+        </li>
+        <li *ngIf="hero.origin" class="list-group-item">
+            {{hero.origin.description}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card form-group">
+      <div class="card-header">
+        Languages
+      </div>
+      <ul *ngIf="hero.origin" class="list-group list-group-flush">
+        <li class="list-group-item">TODO</li>
+        <!-- <li *ngFor="let item of hero.origin.equipment" class="list-group-item">
+          {{item}}
+        </li> -->
+      </ul>
+      <div *ngIf="!hero.origin" class="card-body"></div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card form-group">
+      <div class="card-header">
+        Equipment
+      </div>
+      <ul *ngIf="hero.origin" class="list-group list-group-flush">
+        <li *ngFor="let item of hero.origin.equipment" class="list-group-item">
+          {{item}}
+        </li>
+      </ul>
+      <div *ngIf="!hero.origin" class="card-body"></div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="realName">Real Name</label>
+      <input id="realName" [(ngModel)]="hero.realName" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="hometown">Hometown</label>
+      <input id="hometown" [(ngModel)]="hero.hometown" type="text" class="form-control">
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="form-group">
+      <label for="dayJob">Day Job</label>
+      <input id="dayJob" [(ngModel)]="hero.dayJob" type="text" class="form-control">
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-4">
+  </div>
+  <div class="col-md-4">
+    <div class="card form-group">
+      <div class="card-header">
+        Archetype:
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <select [(ngModel)]="hero.archetype" class="form-control">
+            <option *ngFor="let option of archetypes" [ngValue]="option">{{option.name}}</option>
+          </select>
+        </li>
+        <ng-container *ngIf="hero.archetype">
+          <li class="list-group-item">
+            {{hero.archetype.description}}
+          </li>
+          <li class="list-group-item">
+            <b>Inherent Ability: </b>{{hero.archetype.inherentAbility}}
+          </li>
+          <li class="list-group-item">
+            <b>Stat Increase: </b>{{hero.archetype.statIncreases}}
+          </li>
+          <li class="list-group-item">
+            <b>Powers: </b>{{hero.archetype.primaryPower}}/{{hero.archetype.secondaryPower}}
+          </li>
+          <li class="list-group-item">
+            <b>Recovery/Endurance Dice: </b>{{hero.archetype.recoveryDice}}/{{hero.archetype.enduranceDice}}
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card form-group">
+      <div class="card-header">
+        Alignment:
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <select [(ngModel)]="hero.alignment" class="form-control">
+            <option *ngFor="let option of alignments" [ngValue]="option">{{option.name}}</option>
+          </select>
+        </li>
+        <li *ngIf="hero.alignment" class="list-group-item">
+            {{hero.alignment.description}}
+        </li>
+      </ul>
+    </div>
+    <div class="card form-group">
+      <div class="card-header">
+        Traversal:
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <select [(ngModel)]="hero.traversal" class="form-control">
+            <option *ngFor="let option of traversalPowers" [ngValue]="option">{{option.name}}</option>
+          </select>
+        </li>
+        <ng-container *ngIf="hero.traversal">
+          <li *ngFor="let item of hero.traversal.abilities" class="list-group-item">
+            <b>{{item.name}}: </b>{{item.description}}
+          </li>
+        </ng-container>
+      </ul>
+    </div>
+  </div>
+</div>
