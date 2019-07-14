@@ -27,6 +27,13 @@ export class Hero {
 
     return mod;
   }
+  canBeProficient(skill: string): boolean {
+    if (this.skills[skill]) return true;
+
+    return this.origin && 
+      this.origin.proficiencyOptions.indexOf(skill) > -1 && 
+      this.origin.proficiencyOptions.filter(s => this.skills[s]).length < this.origin.proficiencyCount;
+  }
 
   constructor() {
     Stats.forEach(s => this.stats[s.name] = 10);

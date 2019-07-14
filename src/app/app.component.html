@@ -122,15 +122,16 @@
               <td>
                 <div class="d-flex justify-content-center">
                   <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="{{skill}}" [(ngModel)]="hero.skills[skill]">
+                    <input 
+                      type="checkbox" class="custom-control-input" id="{{skill}}" 
+                      [(ngModel)]="hero.skills[skill]" [disabled]="!hero.canBeProficient(skill)"
+                    >
                     <label class="custom-control-label" for="{{skill}}"></label>
                   </div>
                 </div>
               </td>
               <td class="text-right">
-                <b *ngIf="hero.stats[stat.name]">
-                  {{hero.getMod(stat.name, skill) | signed}}
-                </b>
+                <b *ngIf="hero.stats[stat.name]">{{hero.getMod(stat.name, skill) | signed}}</b>
               </td>
             </tr>
           </ng-container>
