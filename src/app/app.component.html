@@ -87,14 +87,14 @@
 
 <div class="row">
   <div class="col-md-8 col-lg-6">
-    <div class="card form-group">      
-      <table class="table table-bordered mb-0">
+    <div class="card form-group">
+      <table class="table table-bordered text-center mb-0">
         <thead>
           <tr>
             <th scope="col">Stat</th>
-            <th scope="col">Skill</th>
+            <th scope="col" class="text-left">Skill</th>
             <th scope="col">Prof.</th>
-            <th scope="col">Bonus</th>
+            <th scope="col" class="text-right">Bonus</th>
           </tr>
         </thead>
         <tbody>
@@ -102,16 +102,16 @@
             <tr *ngFor="let skill of skillMap[stat.name]; index as j">
               <td *ngIf="j === 0" [attr.rowspan]="skillMap[stat.name].length">                                  
                 <div class="row">                  
-                  <label for="stat{{i}}" class="col-sm-7 col-form-label px-0 text-center">{{stat.name}}</label>                
+                  <label for="stat{{i}}" class="col-sm-7 col-form-label pr-sm-0">{{stat.name}}</label>                
                   <div class="col-sm-5 pl-sm-0">
-                    <input id="stat{{i}}" class="form-control form-control text-center" [(ngModel)]="hero.stats[stat.name]" type="number" min="3" max="20">
+                    <input id="stat{{i}}" class="form-control form-control" [(ngModel)]="hero.stats[stat.name]" type="number" min="3" max="20">
                   </div>
                 </div>
-                <div class="display-4 text-center mt-2">
+                <div class="display-4 mt-2">
                   <b *ngIf="hero.stats[stat.name]">{{hero.getMod(stat.name) | signed}}</b>
                 </div>
               </td>
-              <td>{{skill}}</td>
+              <td class="text-left">{{skill}}</td>
               <td>
                 <div class="d-flex justify-content-center">
                   <div class="custom-control custom-checkbox">
