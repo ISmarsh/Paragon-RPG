@@ -107,7 +107,7 @@
                     <input id="stat{{i}}" class="form-control form-control text-center" [(ngModel)]="hero.stats[stat.name]" type="number" min="3" max="20">
                   </div>
                 </div>
-                <div class="display-4 text-center mt-4">
+                <div class="display-4 text-center mt-2">
                   <b *ngIf="hero.stats[stat.name]">{{hero.getMod(stat.name) | signed}}</b>
                 </div>
               </td>
