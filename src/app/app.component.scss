@@ -3,3 +3,14 @@ label.custom-control-label:empty {
     left: -1.25rem;
   }
 }
+
+.mod {
+  &.negative::before {
+    margin-left: -0.74170ch !important;
+    content: '-';
+  }
+  &:not(.negative)::before {
+    margin-left: -1.26875ch !important;
+    content: '+';
+  }
+}

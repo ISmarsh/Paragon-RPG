@@ -102,13 +102,20 @@
             <tr *ngFor="let skill of skillMap[stat.name]; index as j">
               <td *ngIf="j === 0" [attr.rowspan]="skillMap[stat.name].length">                                  
                 <div class="row">                  
-                  <label for="stat{{i}}" class="col-sm-7 col-form-label pr-sm-0">{{stat.name}}</label>                
-                  <div class="col-sm-5 pl-sm-0">
-                    <input id="stat{{i}}" class="form-control form-control" [(ngModel)]="hero.stats[stat.name]" type="number" min="3" max="20">
+                  <label for="stat{{i}}" class="col-sm-8 col-form-label text-sm-left">
+                    {{stat.name}}
+                  </label>                
+                  <div class="col-sm-4 pl-sm-0">
+                    <input 
+                      id="stat{{i}}" class="form-control form-control text-center text-sm-right" 
+                      [(ngModel)]="hero.stats[stat.name]" type="number" min="3" max="20"
+                    >
                   </div>
                 </div>
                 <div class="display-4 mt-2">
-                  <b *ngIf="hero.stats[stat.name]">{{hero.getMod(stat.name) | signed}}</b>
+                  <b *ngIf="hero.stats[stat.name]" class="mod" [class.negative]="hero.getMod(stat.name) < 0">{{
+                    hero.getMod(stat.name) | abs
+                  }}</b>
                 </div>
               </td>
               <td class="text-left">{{skill}}</td>
