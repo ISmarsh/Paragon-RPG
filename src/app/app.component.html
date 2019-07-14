@@ -88,19 +88,19 @@
 <div class="row">
   <div class="col-md-8 col-lg-6">
     <div class="card form-group">
-      <table class="table table-bordered text-center mb-0">
-        <thead>
+      <table class="table text-center mb-0">
+        <thead class="border-top-0">
           <tr>
-            <th scope="col">Stat</th>
-            <th scope="col" class="text-left">Skill</th>
-            <th scope="col">Prof.</th>
-            <th scope="col" class="text-right">Bonus</th>
+            <th scope="col" class="border-top-0 border-right">Stat</th>
+            <th scope="col" class="border-top-0 text-left">Skill</th>
+            <th scope="col" class="border-top-0">Prof.</th>
+            <th scope="col" class="border-top-0 text-right">Bonus</th>
           </tr>
         </thead>
         <tbody>
           <ng-container *ngFor="let stat of stats; index as i">
             <tr *ngFor="let skill of skillMap[stat.name]; index as j">
-              <td *ngIf="j === 0" [attr.rowspan]="skillMap[stat.name].length">                                  
+              <td *ngIf="j === 0" [attr.rowspan]="skillMap[stat.name].length" class="border-right">
                 <div class="row">                  
                   <label for="stat{{i}}" class="col-sm-8 col-form-label text-sm-left">
                     {{stat.name}}
