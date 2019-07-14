@@ -29,6 +29,6 @@ export class Hero {
   }
 
   constructor() {
-    Stats.forEach(s => this.stats[s.name] = 8);
+    Stats.forEach(s => this.stats[s.name] = 10);
   }
 }
