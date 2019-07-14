@@ -13,9 +13,6 @@
       <input id="level" [(ngModel)]="hero.level" type="number" min="1" max="20" class="form-control">
     </div>
   </div>
-  <!-- <div class="col-md-1">
-    <button (click)="click()" class="btn btn-primary">Click</button>
-  </div> -->
 </div>
 
 <div class="row">
@@ -27,7 +24,9 @@
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
           <select [(ngModel)]="hero.origin" class="form-control">
-            <option *ngFor="let option of origins" [ngValue]="option">{{option.name}}</option>
+            <option *ngFor="let option of origins" [ngValue]="option">
+              {{option.name}}
+            </option>
           </select>
         </li>
         <li *ngIf="hero.origin" class="list-group-item">
@@ -87,9 +86,52 @@
 </div>
 
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-md-8 col-lg-6">
+    <div class="card form-group">      
+      <table class="table table-bordered mb-0">
+        <thead>
+          <tr>
+            <th scope="col">Stat</th>
+            <th scope="col">Skill</th>
+            <th scope="col">Prof.</th>
+            <th scope="col">Bonus</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let stat of stats; index as i">
+            <tr *ngFor="let skill of skillMap[stat.name]; index as j">
+              <td *ngIf="j === 0" [attr.rowspan]="skillMap[stat.name].length">                                  
+                <div class="row">                  
+                  <label for="stat{{i}}" class="col-sm-7 col-form-label px-0 text-center">{{stat.name}}</label>                
+                  <div class="col-sm-5 pl-sm-0">
+                    <input id="stat{{i}}" class="form-control form-control text-center" [(ngModel)]="hero.stats[stat.name]" type="number" min="3" max="20">
+                  </div>
+                </div>
+                <div class="display-4 text-center mt-4">
+                  <b *ngIf="hero.stats[stat.name]">{{hero.getMod(stat.name) | signed}}</b>
+                </div>
+              </td>
+              <td>{{skill}}</td>
+              <td>
+                <div class="d-flex justify-content-center">
+                  <div class="custom-control custom-checkbox">
+                    <input type="checkbox" class="custom-control-input" id="{{skill}}" [(ngModel)]="hero.skills[skill]">
+                    <label class="custom-control-label" for="{{skill}}"></label>
+                  </div>
+                </div>
+              </td>
+              <td class="text-right">
+                <b *ngIf="hero.stats[stat.name]">
+                  {{hero.getMod(stat.name, skill) | signed}}
+                </b>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+      </table>    
+    </div>
   </div>
-  <div class="col-md-4">
+  <div class="col-md-4 col-lg-6">
     <div class="card form-group">
       <div class="card-header">
         Archetype:
@@ -119,8 +161,6 @@
         </ng-container>
       </ul>
     </div>
-  </div>
-  <div class="col-md-4">
     <div class="card form-group">
       <div class="card-header">
         Alignment:
