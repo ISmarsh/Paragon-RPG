@@ -1,3 +1,9 @@
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 label.custom-control-label:empty {
   &::before, &::after {
     left: -1.25rem;
@@ -5,12 +11,12 @@ label.custom-control-label:empty {
 }
 
 .mod {
+  margin-left: -1ch !important;
+  
   &.negative::before {
-    margin-left: -0.74170ch !important;
     content: '-';
   }
   &:not(.negative)::before {
-    margin-left: -1.26875ch !important;
     content: '+';
   }
 }

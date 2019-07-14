@@ -6,9 +6,19 @@ import { Stats } from '../data/stat';
 
 export class Hero {
   heroName?: string;
-  origin?: Origin;
+  private _origin?: Origin;
+  get origin() { return this._origin; }
+  set origin(value: Origin) {
+    this._origin = value;
+
+    for (const skill in this.skills) {
+      if (this.origin.proficiencyOptions.indexOf(skill) === -1) {
+        this.skills[skill] = false;
+      }
+    }
+  }
   level = 1;
-  proficiency() { get: { return 2 + Math.round(this.level / 4); } }
+  proficiency() { get: { return 2 + Math.floor((this.level - 1) / 4); } }
 
   realName?: string;
   hometown?: string;
@@ -30,8 +40,8 @@ export class Hero {
   canBeProficient(skill: string): boolean {
     if (this.skills[skill]) return true;
 
-    return this.origin && 
-      this.origin.proficiencyOptions.indexOf(skill) > -1 && 
+    return this.origin &&
+      this.origin.proficiencyOptions.indexOf(skill) > -1 &&
       this.origin.proficiencyOptions.filter(s => this.skills[s]).length < this.origin.proficiencyCount;
   }
 
