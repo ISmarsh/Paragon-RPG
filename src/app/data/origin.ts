@@ -3,7 +3,7 @@ import { Data } from './data';
 export interface Origin extends Data {
   proficiencyCount: number;
   proficiencyOptions: string[];
-  // languages: string[];
+  languages: string[];
   equipment: string[];
   // attack: 
 }
@@ -27,6 +27,9 @@ export const Origins: Origin[] = [
       "Stealth",
       "Technology",
       "Throw"
+    ],
+    "languages": [
+      "Alien"
     ],
     "equipment": [
       "Alien Artifact",
@@ -53,6 +56,9 @@ export const Origins: Origin[] = [
       "Religion",
       "Resolve",
       "Stealth"
+    ],
+    "languages": [
+      "Mystic"
     ],
     "equipment": [
       "Cell Phone",
@@ -82,6 +88,9 @@ export const Origins: Origin[] = [
       "Throw",
       "Tracking"
     ],
+    "languages": [
+      "Foreign"
+    ],
     "equipment": [
       "Cell Phone",
       "Costume",
@@ -109,6 +118,10 @@ export const Origins: Origin[] = [
       "Resolve",
       "Stealth",
       "Throw"
+    ],
+    "languages": [
+      "Foreign",
+      "Foreign"
     ],
     "equipment": [
       "Cell Phone",
@@ -138,10 +151,41 @@ export const Origins: Origin[] = [
       "Resolve",
       "Stealth"
     ],
+    "languages": [
+      "Foreign"
+    ],
     "equipment": [
       "Cell Phone",
       "Costume",
       "Medical Tools",
+      "Power Based Armaments",
+      "Set of Basic Clothes"
+    ]
+  },
+  {
+    "name": "Technology",
+    "description": "Your powers came from advanced Technology. Whether through full body exosuits, enhanced weapons and armaments, or other gadgets.",
+    "proficiencyCount": 3,
+    "proficiencyOptions": [
+      "Bluff",
+      "Disarm",
+      "Hack",
+      "Investigation",
+      "Lockpick",
+      "Medicine",
+      "Pop Culture",
+      "Quips",
+      "Resolve",
+      "Technology",
+      "Tracking"
+    ],
+    "languages": [
+      "Foreign"
+    ],
+    "equipment": [
+      "Cell Phone",
+      "Costume",
+      "Hacker Tools",
       "Power Based Armaments",
       "Set of Basic Clothes"
     ]

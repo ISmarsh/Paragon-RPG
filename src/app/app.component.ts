@@ -1,13 +1,15 @@
 import { Component } from '@angular/core';
 
 import { Hero } from './model/hero';
-import { Origins } from 'src/app/data/origin';
-import { Alignments } from 'src/app/data/alignment';
-import { Archetypes } from 'src/app/data/archetype';
-import { TraversalPowers } from 'src/app/data/traversal';
-import { Stats } from 'src/app/data/stat';
-import { Skills } from 'src/app/data/skill';
-import { SkillMap } from 'src/app/data/stat-skill-map';
+import { Origins } from './data/origin';
+import { Languages } from './data/language';
+import { Alignments } from './data/alignment';
+import { Archetypes } from './data/archetype';
+import { Powers } from './data/power';
+import { TraversalPowers } from './data/traversal';
+import { Stats } from './data/stat';
+import { Skills } from './data/skill';
+import { SkillMap } from './data/stat-skill-map';
 
 @Component({
   selector: 'app-root',
@@ -20,8 +22,10 @@ export class AppComponent {
   hero = new Hero();
 
   origins = Origins;
+  languages = Languages;
   alignments = Alignments;
   archetypes = Archetypes;
+  powers = Powers;
   traversalPowers = TraversalPowers;
 
   stats = Stats;
