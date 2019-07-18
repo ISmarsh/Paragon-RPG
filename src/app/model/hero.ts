@@ -68,7 +68,9 @@ export class Hero {
     const array: string[] = [];
 
     for (const stat in this.archetype.statIncreases) {
-      array.push(`${stat} + ${this.archetype.statIncreases[stat]}`)
+      const s = stat !== "All Stats";
+
+      array.push(`${stat} increase${s ? 's' : ''} by ${this.archetype.statIncreases[stat]}`)
     }
 
     return array.join(", ");

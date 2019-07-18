@@ -41,7 +41,7 @@
         Languages
       </div>
       <ul *ngIf="hero.origin" class="list-group list-group-flush">
-        <li class="list-group-item">English</li>        
+        <li class="list-group-item"><b>English</b></li>        
         <li *ngFor="let category of hero.origin.languages; index as i" class="list-group-item">
           <select [(ngModel)]="hero.languages[i]" class="form-control">
             <option *ngFor="let language of languages[category]" [ngValue]="language">
