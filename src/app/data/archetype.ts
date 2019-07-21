@@ -2,6 +2,7 @@ import { Data } from './data';
 import { Index } from './collection';
 
 export type Archetype = Data & {
+  description: string;
   inherentAbility: string;
   statIncreases: {[stat: string]: number};
   primaryPower: string;

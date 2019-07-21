@@ -2,6 +2,7 @@ import { Data } from './data';
 import { Index } from './collection';
 
 export type Origin = Data & {
+  description: string;
   proficiencyCount: number;
   proficiencyOptions: string[];
   languages: string[];

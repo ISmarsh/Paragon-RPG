@@ -2,7 +2,7 @@ import { Data } from './data';
 import { Index } from './collection';
 
 export type TraversalPower = Data & {
-  abilities: Data[];
+  abilities: (Data & { description: string; })[];
 }
 
 export const TraversalPowers = new Index<TraversalPower>(

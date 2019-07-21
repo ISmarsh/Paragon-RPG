@@ -1,6 +1,8 @@
 import { Data } from './data';
 
-export type Stat = Data;
+export type Stat = Data & {
+  description: string;
+};
 
 export const Stats: Stat[] = [
   {

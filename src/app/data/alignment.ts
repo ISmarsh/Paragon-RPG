@@ -1,7 +1,9 @@
 import { Data } from './data';
 import { Index } from './collection';
 
-export type Alignment = Data;
+export type Alignment = Data & {
+  description: string;
+};
 
 export const Alignments = new Index<Alignment>(
   {

@@ -1,7 +1,9 @@
 import { Data } from './data';
 import { Index } from './collection';
 
-export type Skill = Data;
+export type Skill = Data & {
+  description: string;
+};
 
 export const Skills = new Index<Skill>(
   {
