@@ -1,6 +1,9 @@
 import { Data } from './data';
+import { Index } from './collection';
 
-export const Alignments: Data[] = [
+export type Alignment = Data;
+
+export const Alignments = new Index<Alignment>(
   {
     "name": "Hero",
     "description": "You are the purest sense of good in the world. You never venture from your path of righteous right, and assure the safety of citizens at all costs. You never kill and always apprehend criminals."
@@ -25,4 +28,4 @@ export const Alignments: Data[] = [
     "name": "Villain",
     "description": "You are the purest sense of evil in the world. You concoct your plots of revenge and malicious intent doing anything and everything to assure the outcome is in your favor. If there is somebody standing in your way, eliminating them is the only thing on your mind. It’s kill or be killed, and you refuse to be on the receiving end. All that matters is what you want, and you will achieve it."
   },    
-]
+);

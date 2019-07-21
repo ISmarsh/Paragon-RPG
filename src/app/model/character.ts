@@ -1,32 +1,44 @@
-import { Origin } from 'src/app/data/origin';
-import { Data } from 'src/app/data/data';
-import { Archetype } from 'src/app/data/archetype';
-import { TraversalPower } from 'src/app/data/traversal';
+import { Origin, Origins } from 'src/app/data/origin';
+import { Archetype, Archetypes } from 'src/app/data/archetype';
+import { TraversalPower, TraversalPowers } from 'src/app/data/traversal';
 import { Stats } from '../data/stat';
-import { Language } from '../data/language';
+import { Entity } from './entity';
+import { Alignment, Alignments } from '../data/alignment';
+import { jsonObject, jsonMember } from 'typedjson';
+import { jsonDataMember, jsonDataArrayMember } from '../utility/json-data-member';
+import { Language, Languages } from '../data/language';
 
-export class Hero {
-  heroName?: string;
-  level = 1;
-  proficiency() { get: { return 2 + Math.floor((this.level - 1) / 4); } }
+@jsonObject
+export class Character extends Entity {
+  constructor() {
+    super();
 
-  health: number;
+    Stats.forEach(s => this.stats[s.name] = 10);
+  }
+  
+  @jsonMember name?: string;
+  @jsonMember level: number = 1;
+  get proficiency(): number { return 2 + Math.floor((this.level - 1) / 4); }
+
+  @jsonMember health: number;
   get maxHealth(): number {
     if (!this.archetype) return undefined;
 
     return Number.parseInt(this.archetype.recoveryDice.slice(2)) + this.getMod("Vitality");
   }
-  tempHealth: number = 0;
+  @jsonMember tempHealth: number = 0;
 
-  stamina: number;
+  @jsonMember stamina: number;
   get maxStamina(): number {
     return Math.min(3, this.level + this.getMod("Swiftness"));
   }
-  
+
   get defense(): number { return 10 + this.getMod("Vitality"); }
 
   get fortitude(): number { return 8 + this.getMod("Ego"); }
 
+
+  @jsonDataMember(Origins)
   private _origin?: Origin;
   get origin() { return this._origin; }
   set origin(value: Origin) {
@@ -40,14 +52,17 @@ export class Hero {
       }
     }
   }
-  languages: Language[];
+  @jsonDataArrayMember(Languages)
+  languages: Language[] = [];
 
-  realName?: string;
-  hometown?: string;
-  dayJob?: string;
+  @jsonMember realName?: string;
+  @jsonMember hometown?: string;
+  @jsonMember dayJob?: string;
 
-  alignment?: Data;
+  @jsonDataMember(Alignments)
+  alignment?: Alignment;
 
+  @jsonDataMember(Archetypes)
   private _archetype?: Archetype;
   get archetype() { return this._archetype; }
   set archetype(value: Archetype) {
@@ -75,12 +90,13 @@ export class Hero {
 
     return array.join(", ");
   }
-  primaryPower?: string;
-  secondaryPower?: string;
+  @jsonMember primaryPower?: string;
+  @jsonMember secondaryPower?: string;
 
+  @jsonDataMember(TraversalPowers)
   traversal?: TraversalPower;
 
-  stats: { [stat: string]: number } = {};
+  @jsonMember stats: { [stat: string]: number } = {};
   getStat(stat: string): number {
     return this.stats[stat] + this.getStatIncrease(stat);
   }
@@ -91,11 +107,11 @@ export class Hero {
       + (this.archetype.statIncreases["All Stats"] || 0);
   }
 
-  skills: { [skill: string]: boolean } = {};
+  @jsonMember skills: { [skill: string]: boolean } = {};
   getMod(stat: string, skill?: string): number {
     let mod = Math.round((this.getStat(stat) - 11) / 2);
 
-    if (skill && this.skills[skill]) { mod += this.proficiency(); }
+    if (skill && this.skills[skill]) { mod += this.proficiency; }
 
     return mod;
   }
@@ -105,9 +121,5 @@ export class Hero {
     return this.origin &&
       this.origin.proficiencyOptions.indexOf(skill) > -1 &&
       this.origin.proficiencyOptions.filter(s => this.skills[s]).length < this.origin.proficiencyCount;
-  }
-
-  constructor() {
-    Stats.forEach(s => this.stats[s.name] = 10);
   }
 }

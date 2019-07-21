@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
-import { Hero } from './model/hero';
+import { Character } from './model/character';
 import { Origins } from './data/origin';
 import { Languages } from './data/language';
 import { Alignments } from './data/alignment';
@@ -10,16 +10,19 @@ import { TraversalPowers } from './data/traversal';
 import { Stats } from './data/stat';
 import { Skills } from './data/skill';
 import { SkillMap } from './data/stat-skill-map';
+import { Repository } from './model/repository';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  title = 'paragon-rpg';
+export class AppComponent implements OnInit {
+  ngOnInit(): void {
+    this.character = Repository.get(Character)[0] || new Character();
+  }
   
-  hero = new Hero();
+  character = new Character();
 
   origins = Origins;
   languages = Languages;
@@ -31,4 +34,8 @@ export class AppComponent {
   stats = Stats;
   skills = Skills;
   skillMap = SkillMap;
+
+  save() {
+    Repository.save(Character, this.character)
+  }
 }

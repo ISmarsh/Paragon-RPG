@@ -1,6 +1,7 @@
 import { Data } from './data';
+import { Index } from './collection';
 
-export interface Origin extends Data {
+export type Origin = Data & {
   proficiencyCount: number;
   proficiencyOptions: string[];
   languages: string[];
@@ -8,7 +9,7 @@ export interface Origin extends Data {
   // attack: 
 }
 
-export const Origins: Origin[] = [
+export const Origins = new Index<Origin>(
   {
     "name": "Alien",
     "description": "Your powers came from an Alien source outside of Earth. Whether they took over your body, live in symbiosis with you, or simply gifted you inhuman powers.",
@@ -189,5 +190,5 @@ export const Origins: Origin[] = [
       "Power Based Armaments",
       "Set of Basic Clothes"
     ]
-  },    
-];
+  }
+);

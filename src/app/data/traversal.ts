@@ -1,11 +1,11 @@
 import { Data } from './data';
+import { Index } from './collection';
 
-export interface TraversalPower {
-  name: string;
+export type TraversalPower = Data & {
   abilities: Data[];
 }
 
-export const TraversalPowers: TraversalPower[] = [
+export const TraversalPowers = new Index<TraversalPower>(
   {
     "name": "Burrow",
     "abilities": [
@@ -96,5 +96,5 @@ export const TraversalPowers: TraversalPower[] = [
         "description": "As an Act, you can spend 1 Stamina Point to bring an ally within 30 feet of you to your location and place them in an unoccupied space within 5 feet of you."
       }
     ]
-  },    
-]
+  },
+);

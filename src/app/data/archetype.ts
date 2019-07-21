@@ -1,6 +1,7 @@
 import { Data } from './data';
+import { Index } from './collection';
 
-export interface Archetype extends Data {
+export type Archetype = Data & {
   inherentAbility: string;
   statIncreases: {[stat: string]: number};
   primaryPower: string;
@@ -9,7 +10,7 @@ export interface Archetype extends Data {
   enduranceDice: string;
 }
 
-export const Archetypes: Archetype[] = [
+export const Archetypes = new Index<Archetype>(
   {
     "name": "Blaster",
     "description": "The Blaster is an offensive juggernaut. They can deal a ton of damage from a distance and decent melee damage. However, the Blaster must be careful because they are somewhat fragile compared to other heroes with no real defenses. Their best defense is a powerful offense.",
@@ -152,4 +153,4 @@ export const Archetypes: Archetype[] = [
     "recoveryDice": "1d12",
     "enduranceDice": "1d6"
   },
-]
+);

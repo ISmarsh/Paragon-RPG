@@ -1,4 +1,6 @@
-export interface Data {
-  name: string;
-  description: string;
-}
+export type Data =
+  { name: string; } &
+  ( {} 
+  | { description: string; }
+  )
+;

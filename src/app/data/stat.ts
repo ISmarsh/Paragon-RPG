@@ -1,6 +1,8 @@
 import { Data } from './data';
 
-export const Stats: Data[] = [
+export type Stat = Data;
+
+export const Stats: Stat[] = [
   {
     "name": "Might",
     "description": "Might is how strong your character is physically. The more Might the more melee damage you are able to do and the heavier objects you can move. It is also easier to Grapple or Trip enemies."

@@ -1,10 +1,11 @@
+import { Data } from './data';
+import { CategoryIndex, Index } from './collection';
 
-export interface Language {
-  name: string;
+export type Language = Data & {
   speakers: string[];
 }
 
-export const Languages: { [category: string]: Language[] } = {
+export const Languages = new CategoryIndex<Language>({
   "Alien": [
     {
       "name": "Kheld",
@@ -237,4 +238,4 @@ export const Languages: { [category: string]: Language[] } = {
       ]
     }
   ]
-}
+});

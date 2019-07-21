@@ -1,5 +1,5 @@
 
-export const SkillMap: Object = {
+export const SkillMap: { [skill: string]: string[] } = {
   "Might": ["Climb", "Lift", "Pull/Push", "Throw"],
   "Swiftness": ["Acrobatics", "Disarm", "Hack", "Lockpick", "Pickpocket", "Stealth"],
   "Vitality": ["Balance", "Concentration", "Resolve"],

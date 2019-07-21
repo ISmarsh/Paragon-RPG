@@ -1,17 +1,18 @@
 <div class="row pt-5">
   <div class="col-md-4">
     <div class="form-group">
-      <label for="heroName">
-        {{hero.alignment ? hero.alignment.name : "Hero"}} Name
-      </label>
-      <input id="heroName" [(ngModel)]="hero.heroName" type="text" class="form-control" autofocus>
+      <label for="name">Name</label>
+      <input id="name" [(ngModel)]="character.name" type="text" class="form-control" autofocus>
     </div>
   </div>
   <div class="col-md-2">
     <div class="form-group">
       <label for="level">Level</label>
-      <input id="level" [(ngModel)]="hero.level" type="number" min="1" max="20" class="form-control">
+      <input id="level" [(ngModel)]="character.level" type="number" min="1" max="20" class="form-control">
     </div>
+  </div>
+  <div class="col align-self-end d-flex">
+    <button (click)="save()" class="btn btn-primary form-group ml-auto">Save</button>
   </div>
 </div>
 
@@ -23,14 +24,14 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <select [(ngModel)]="hero.origin" class="form-control">
+          <select [(ngModel)]="character.origin" class="form-control">
             <option *ngFor="let option of origins" [ngValue]="option">
               {{option.name}}
             </option>
           </select>
         </li>
-        <li *ngIf="hero.origin" class="list-group-item">
-            {{hero.origin.description}}
+        <li *ngIf="character.origin" class="list-group-item">
+            {{character.origin.description}}
         </li>
       </ul>
     </div>
@@ -40,20 +41,20 @@
       <div class="card-header">
         Languages
       </div>
-      <ul *ngIf="hero.origin" class="list-group list-group-flush">
+      <ul *ngIf="character.origin" class="list-group list-group-flush">
         <li class="list-group-item"><b>English</b></li>        
-        <li *ngFor="let category of hero.origin.languages; index as i" class="list-group-item">
-          <select [(ngModel)]="hero.languages[i]" class="form-control">
-            <option *ngFor="let language of languages[category]" [ngValue]="language">
+        <li *ngFor="let category of character.origin.languages; index as i" class="list-group-item">
+          <select [(ngModel)]="character.languages[i]" class="form-control">
+            <option *ngFor="let language of languages.byCategory[category]" [ngValue]="language">
               {{language.name}}
             </option>
           </select>
-          <div *ngIf="hero.languages[i]" class="mt-2">
-            Speakers: {{hero.languages[i].speakers.join(", ")}}
+          <div *ngIf="character.languages[i]" class="mt-2">
+            Speakers: {{character.languages[i].speakers.join(", ")}}
           </div>
         </li>
       </ul>
-      <div *ngIf="!hero.origin" class="card-body"></div>
+      <div *ngIf="!character.origin" class="card-body"></div>
     </div>
   </div>
   <div class="col-md-4">
@@ -61,12 +62,12 @@
       <div class="card-header">
         Equipment
       </div>
-      <ul *ngIf="hero.origin" class="list-group list-group-flush">
-        <li *ngFor="let item of hero.origin.equipment" class="list-group-item">
+      <ul *ngIf="character.origin" class="list-group list-group-flush">
+        <li *ngFor="let item of character.origin.equipment" class="list-group-item">
           {{item}}
         </li>
       </ul>
-      <div *ngIf="!hero.origin" class="card-body"></div>
+      <div *ngIf="!character.origin" class="card-body"></div>
     </div>
   </div>
 </div>
@@ -75,19 +76,19 @@
   <div class="col-md-4">
     <div class="form-group">
       <label for="realName">Real Name</label>
-      <input id="realName" [(ngModel)]="hero.realName" type="text" class="form-control">
+      <input id="realName" [(ngModel)]="character.realName" type="text" class="form-control">
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="hometown">Hometown</label>
-      <input id="hometown" [(ngModel)]="hero.hometown" type="text" class="form-control">
+      <input id="hometown" [(ngModel)]="character.hometown" type="text" class="form-control">
     </div>
   </div>
   <div class="col-md-4">
     <div class="form-group">
       <label for="dayJob">Day Job</label>
-      <input id="dayJob" [(ngModel)]="hero.dayJob" type="text" class="form-control">
+      <input id="dayJob" [(ngModel)]="character.dayJob" type="text" class="form-control">
     </div>
   </div>
 </div>
@@ -100,12 +101,12 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <select [(ngModel)]="hero.alignment" class="form-control">
+          <select [(ngModel)]="character.alignment" class="form-control">
             <option *ngFor="let option of alignments" [ngValue]="option">{{option.name}}</option>
           </select>
         </li>
-        <li *ngIf="hero.alignment" class="list-group-item">
-            {{hero.alignment.description}}
+        <li *ngIf="character.alignment" class="list-group-item">
+            {{character.alignment.description}}
         </li>
       </ul>
     </div>
@@ -116,47 +117,47 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <select [(ngModel)]="hero.archetype" class="form-control">
+          <select [(ngModel)]="character.archetype" class="form-control">
             <option *ngFor="let option of archetypes" [ngValue]="option">{{option.name}}</option>
           </select>
         </li>
-        <ng-container *ngIf="hero.archetype">
+        <ng-container *ngIf="character.archetype">
           <li class="list-group-item">
-            {{hero.archetype.description}}
+            {{character.archetype.description}}
           </li>
           <li class="list-group-item">
-            <b>Inherent Ability: </b>{{hero.archetype.inherentAbility}}
+            <b>Inherent Ability: </b>{{character.archetype.inherentAbility}}
           </li>
           <li class="list-group-item">
             <b>Stat Increase: </b>
-            {{hero.archetypeStatDisplay()}}
+            {{character.archetypeStatDisplay()}}
           </li>
           <li class="list-group-item">
-            <b>Powers: </b>{{hero.archetype.primaryPower}}/{{hero.archetype.secondaryPower}}
+            <b>Powers: </b>{{character.archetype.primaryPower}}/{{character.archetype.secondaryPower}}
           </li>
           <li class="list-group-item">
-            <b>Recovery/Endurance Dice: </b>{{hero.archetype.recoveryDice}}/{{hero.archetype.enduranceDice}}
+            <b>Recovery/Endurance Dice: </b>{{character.archetype.recoveryDice}}/{{character.archetype.enduranceDice}}
           </li>
         </ng-container>
       </ul>
     </div>
     <!-- <div class="card form-group">
       <div class="card-header">
-        Primary Power<span *ngIf="hero.archetype"> ({{hero.archetype.primaryPower}})</span>
+        Primary Power<span *ngIf="character.archetype"> ({{character.archetype.primaryPower}})</span>
       </div>
       <div class="card-body">
-        <select *ngIf="hero.archetype" [(ngModel)]="hero.primaryPower" class="form-control">
-          <option *ngFor="let power of powers[hero.archetype.primaryPower]" [ngValue]="power">{{power}}</option>
+        <select *ngIf="character.archetype" [(ngModel)]="character.primaryPower" class="form-control">
+          <option *ngFor="let power of powers.byCategory[character.archetype.primaryPower]" [ngValue]="power.name">{{power.name}}</option>
         </select>
       </div>
     </div>
     <div class="card form-group">
       <div class="card-header">
-        Secondary Power<span *ngIf="hero.archetype"> ({{hero.archetype.secondaryPower}})</span>
+        Secondary Power<span *ngIf="character.archetype"> ({{character.archetype.secondaryPower}})</span>
       </div>
       <div class="card-body">
-        <select *ngIf="hero.archetype" [(ngModel)]="hero.secondaryPower" class="form-control">
-          <option *ngFor="let power of powers[hero.archetype.secondaryPower]" [ngValue]="power">{{power}}</option>
+        <select *ngIf="character.archetype" [(ngModel)]="character.secondaryPower" class="form-control">
+          <option *ngFor="let power of powers.byCategory[character.archetype.secondaryPower]" [ngValue]="power.name">{{power.name}}</option>
         </select>
       </div>
     </div> -->
@@ -167,12 +168,12 @@
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">
-          <select [(ngModel)]="hero.traversal" class="form-control">
+          <select [(ngModel)]="character.traversal" class="form-control">
             <option *ngFor="let option of traversalPowers" [ngValue]="option">{{option.name}}</option>
           </select>
         </li>
-        <ng-container *ngIf="hero.traversal">
-          <li *ngFor="let item of hero.traversal.abilities" class="list-group-item">
+        <ng-container *ngIf="character.traversal">
+          <li *ngFor="let item of character.traversal.abilities" class="list-group-item">
             <b>{{item.name}}: </b>{{item.description}}
           </li>
         </ng-container>
@@ -186,8 +187,8 @@
           <tr>
             <th scope="col" class="border-top-0 border-right">Stat</th>
             <th scope="col" class="border-top-0 text-left">Skill</th>
-            <th scope="col" class="border-top-0">Prof.</th>
-            <th scope="col" class="border-top-0 text-right">Mod.</th>
+            <th scope="col" class="border-top-0 px-0">Prof</th>
+            <th scope="col" class="border-top-0 text-right">Mod</th>
           </tr>
         </thead>
         <tbody>
@@ -212,7 +213,7 @@
                       <td class="p-0">
                         <input 
                           id="stat{{i}}" class="form-control py-4 text-right" 
-                          [(ngModel)]="hero.stats[stat.name]" type="number" min="3" max="20"
+                          [(ngModel)]="character.stats[stat.name]" type="number" min="3" max="20"
                         >
                       </td>
                     </tr>
@@ -221,7 +222,7 @@
                         ASI
                       </td>
                       <td class="mod text-right">{{
-                        hero.getStatIncrease(stat.name)
+                        character.getStatIncrease(stat.name)
                       }}</td>
                     </tr>
                     <tr>
@@ -229,34 +230,34 @@
                         Total
                       </td>
                       <td class="text-right">{{
-                        hero.getStat(stat.name)
+                        character.getStat(stat.name)
                       }}</td>
                     </tr>
                     <tr>
                       <td class="border-right">
                         Mod.
                       </td>
-                      <td *ngIf="hero.stats[stat.name]" class="mod text-right" [class.negative]="hero.getMod(stat.name) < 0">{{
-                        hero.getMod(stat.name) | abs
+                      <td *ngIf="character.stats[stat.name]" class="mod text-right" [class.negative]="character.getMod(stat.name) < 0">{{
+                        character.getMod(stat.name) | abs
                       }}</td>
                     </tr>
                   </tbody>
                 </table>
               </td>
               <td class="text-left">{{skill}}</td>
-              <td>
+              <td class="px-0">
                 <div class="d-flex justify-content-center">
                   <div class="custom-control custom-checkbox">
                     <input 
                       type="checkbox" class="custom-control-input" id="{{skill}}" 
-                      [(ngModel)]="hero.skills[skill]" [disabled]="!hero.canBeProficient(skill)"
+                      [(ngModel)]="character.skills[skill]" [disabled]="!character.canBeProficient(skill)"
                     >
                     <label class="custom-control-label" for="{{skill}}"></label>
                   </div>
                 </div>
               </td>
               <td class="text-right">
-                <span *ngIf="hero.stats[stat.name]">{{hero.getMod(stat.name, skill) | signed}}</span>
+                <span *ngIf="character.stats[stat.name]">{{character.getMod(stat.name, skill) | signed}}</span>
               </td>
             </tr>
           </ng-container>

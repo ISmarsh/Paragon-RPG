@@ -1,6 +1,9 @@
 import { Data } from './data';
+import { Index } from './collection';
 
-export const Skills: Data[] = [
+export type Skill = Data;
+
+export const Skills = new Index<Skill>(
   {
     "name": "Acrobatics",
     "description": "Acrobatics checks are used for situations when a hero wants to be nimble and flashy with their movement or attacks, as well as doing parkour, slipping out of grapples, or getting through difficult terrain."
@@ -121,4 +124,4 @@ export const Skills: Data[] = [
     "name": "Tracking",
     "description": "Tracking checks are used to determine how easily you can track down people with the information you know in the environment. These checks can also be used to determine how well you can read a map you have never seen before."
   },    
-]
+);
