@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 
 import { Character } from './model/character';
 import { Origins } from './data/origin';
@@ -17,12 +18,23 @@ import { Repository } from './model/repository';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.character = Repository.get(Character)[0] || new Character();
   }
-  
+
+  ngAfterViewInit(): void {    
+    this.characterForm.form.valueChanges.subscribe({
+      next: () => {
+        //After the change has been applied, save.
+        setTimeout(() => Repository.save(Character, this.character))
+      }
+    });
+  }
+
   character = new Character();
+  @ViewChild(NgForm, { static: false }) 
+  characterForm: NgForm;
 
   origins = Origins;
   languages = Languages;
@@ -34,8 +46,4 @@ export class AppComponent implements OnInit {
   stats = Stats;
   skills = Skills;
   skillMap = SkillMap;
-
-  save() {
-    Repository.save(Character, this.character)
-  }
 }

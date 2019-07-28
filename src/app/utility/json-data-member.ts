@@ -25,7 +25,7 @@ export function jsonDataArrayMember<T extends Data>(
   data: Index<T>, options?: IJsonArrayMemberOptions
 ): PropertyDecorator {
   options = (options || {});
-  options.serializer = (values: T[]) => values.map(v => v.name);
+  options.serializer = (values: T[]) => values.map(v => v ? v.name : "");
   options.deserializer = (values: string[]) => {
     if (values) {
       return values.map(v => data.byName[v]);

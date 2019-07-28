@@ -9,13 +9,14 @@ import { jsonDataMember, jsonDataArrayMember } from '../utility/json-data-member
 import { Language, Languages } from '../data/language';
 
 @jsonObject
+@Reflect.metadata("name", "Character")
 export class Character extends Entity {
   constructor() {
     super();
 
     Stats.forEach(s => this.stats[s.name] = 10);
   }
-  
+
   @jsonMember name?: string;
   @jsonMember level: number = 1;
   get proficiency(): number { return 2 + Math.floor((this.level - 1) / 4); }

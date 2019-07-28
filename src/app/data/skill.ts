@@ -11,11 +11,11 @@ export const Skills = new Index<Skill>(
     "description": "Acrobatics checks are used for situations when a hero wants to be nimble and flashy with their movement or attacks, as well as doing parkour, slipping out of grapples, or getting through difficult terrain."
   },
   {
-    "name": "History",
+    "name": "Ancient History",
     "description": "Ancient History checks are used to determine knowledge for events of the past exceeding 100 years in the past. Any History check made to determine information from the Year 1919 and before is considered an Ancient History check."
   },
   {
-    "name": "Handling",
+    "name": "Animal Handling",
     "description": "Animal Handling checks are used to see how well you can deal with beasts in nature including woodland creatures, birds, and ferocious beasts from enemy factions."
   },
   {
@@ -75,7 +75,7 @@ export const Skills = new Index<Skill>(
     "description": "Medicine checks are used to determine the health or anatomy of a person. These checks are also used when trying to stabilize a player who has fallen to 0 Health."
   },
   {
-    "name": "History",
+    "name": "Modern History",
     "description": "Modern History checks are used to determine knowledge for events of the past 100 years. Any History check made to determine information from the Years 1920-2020 is considered a Modern History check."
   },
   {
@@ -91,11 +91,11 @@ export const Skills = new Index<Skill>(
     "description": "Pickpocket checks are used to determine how successful you can steal from unaware people, or how well you can place objects on a person without them knowing."
   },
   {
-    "name": "Culture",
+    "name": "Pop Culture",
     "description": "Pop Culture checks are used to determine how much knowledge about Popular Culture you know, including all forms of music, film, television, video games, internet culture, and books. These checks also determine how well you might know a Celebrity or Famous Hero/Villain."
   },
   {
-    "name": "Push",
+    "name": "Pull/Push",
     "description": "Pull/Push checks are used to determine how well you can pull or push stationary objects or vehicles, pull objects out of the ground, or drag immense objects or vehicles."
   },
   {
@@ -125,5 +125,5 @@ export const Skills = new Index<Skill>(
   {
     "name": "Tracking",
     "description": "Tracking checks are used to determine how easily you can track down people with the information you know in the environment. These checks can also be used to determine how well you can read a map you have never seen before."
-  },    
+  },
 );
