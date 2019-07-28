@@ -7,6 +7,7 @@ import { Alignment, Alignments } from '../data/alignment';
 import { jsonObject, jsonMember } from 'typedjson';
 import { jsonDataMember, jsonDataArrayMember } from '../utility/json-data-member';
 import { Language, Languages } from '../data/language';
+import { group } from '../utility/functions';
 
 @jsonObject
 @Reflect.metadata("name", "Character")
@@ -52,6 +53,35 @@ export class Character extends Entity {
         this.skills[skill] = false;
       }
     }
+  }
+  public originSkills(): string[] {
+    const array = new Array<string>(this.origin.proficiencyCount);
+
+    for (let i = 0; i < array.length; i++) {
+      for (let j = 0; j < this.origin.proficiencyOptions.length; j++) {
+        const skill = this.origin.proficiencyOptions[j];
+
+        if (this.skills[skill] && array.indexOf(skill) === -1) {
+          array[i] = skill;
+
+          break;
+        }
+      }
+    }
+
+    return array;
+  }
+  public originLanguageDisplay(): string {
+    var display = "English";
+
+    var categories = group(this.origin.languages);
+    for (const category in categories) {
+      const count = categories[category];
+
+      display += `, ${count} ${category} Language${count > 1 ? "s" : ""} of your choice`;
+    }
+
+    return display + ".";
   }
   @jsonDataArrayMember(Languages)
   languages: Language[] = [];
@@ -109,6 +139,10 @@ export class Character extends Entity {
   }
 
   @jsonMember skills: { [skill: string]: boolean } = {};
+  changeSkill(from: string, to: string): void {
+    this.skills[from] = false;
+    this.skills[to] = true;
+  }
   getMod(stat: string, skill?: string): number {
     let mod = Math.round((this.getStat(stat) - 11) / 2);
 

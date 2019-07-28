@@ -7,7 +7,7 @@ export type Origin = Data & {
   proficiencyOptions: string[];
   languages: string[];
   equipment: string[];
-  // attack: 
+  attack: string
 }
 
 export const Origins = new Index<Origin>(
@@ -39,7 +39,8 @@ export const Origins = new Index<Origin>(
       "Costume",
       "Power Based Armaments",
       "Set of Basic Clothes"
-    ]
+    ],
+    "attack": "Tendril (Might based melee attack, 1d6 + Might Modifier damage)"
   },
   {
     "name": "Magic",
@@ -68,7 +69,8 @@ export const Origins = new Index<Origin>(
       "Mystic Tome",
       "Power Based Armaments",
       "Set of Fancy Clothes"
-    ]
+    ],
+    "attack": "Apprentice Charm (Swiftness based range attack, 30ft range, 1d6 + Swiftness Modifier energy damage and if the attack is a Critical Hit the foe is Confused)"
   },
   {
     "name": "Mutation",
@@ -99,7 +101,8 @@ export const Origins = new Index<Origin>(
       "Genetic Tools",
       "Power Based Armaments",
       "Set of Basic Clothes"
-    ]
+    ],
+    "attack": "Mutagen Capsule (Swiftness based range attack, 30ft range, 1d6 + Swiftness Modifier poison damage)"
   },
   {
     "name": "Natural",
@@ -131,7 +134,8 @@ export const Origins = new Index<Origin>(
       "Power Based Armaments",
       "Set of Basic Clothes",
       "Self Help Book"
-    ]
+    ],
+    "attack": "Combo Strike (Might based melee attack, 2d4 + Swiftness Modifier physical damage)"
   },
   {
     "name": "Science",
@@ -162,7 +166,8 @@ export const Origins = new Index<Origin>(
       "Medical Tools",
       "Power Based Armaments",
       "Set of Basic Clothes"
-    ]
+    ],
+    "attack": "Enhanced Strike (Might based melee attack, 1d6 + Might Modifier physical damage)"
   },
   {
     "name": "Technology",
@@ -190,6 +195,7 @@ export const Origins = new Index<Origin>(
       "Hacker Tools",
       "Power Based Armaments",
       "Set of Basic Clothes"
-    ]
-  }
+    ],
+    "attack": "Tazer Shot (Swiftness based range attack, 30ft range, 1d4 + Swiftness Modifier lightning damage and if the attack is a Critical Hit the foe is Disoriented)"
+  },    
 );
