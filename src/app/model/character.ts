@@ -26,13 +26,13 @@ export class Character extends Entity {
   get maxHealth(): number {
     if (!this.archetype) return undefined;
 
-    return Number.parseInt(this.archetype.recoveryDice.slice(2)) + this.getMod("Vitality");
+    return this.level * (Number.parseInt(this.archetype.recoveryDice.slice(2)) + this.getMod("Vitality"));
   }
   @jsonMember tempHealth: number = 0;
 
   @jsonMember stamina: number;
   get maxStamina(): number {
-    return Math.min(3, this.level + this.getMod("Swiftness"));
+    return Math.max(3, this.level + this.getMod("Swiftness"));
   }
 
   get defense(): number { return 10 + this.getMod("Vitality"); }
