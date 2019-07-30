@@ -6,12 +6,14 @@ import { Origins } from './data/origin';
 import { Languages } from './data/language';
 import { Alignments } from './data/alignment';
 import { Archetypes } from './data/archetype';
-import { Powers } from './data/power';
+import { PowerSets } from './data/power-set';
 import { TraversalPowers } from './data/traversal';
 import { Stats } from './data/stat';
 import { Skills } from './data/skill';
 import { SkillMap } from './data/stat-skill-map';
 import { Repository } from './model/repository';
+import { DamageTypes } from './data/damage-type';
+import { Progression } from './data/leveling';
 
 @Component({
   selector: 'app-root',
@@ -40,10 +42,13 @@ export class AppComponent implements OnInit, AfterViewInit {
   languages = Languages;
   alignments = Alignments;
   archetypes = Archetypes;
-  powers = Powers;
+  powerSets = PowerSets;
   traversalPowers = TraversalPowers;
+  damageTypes = DamageTypes;
 
   stats = Stats;
   skills = Skills;
   skillMap = SkillMap;
+
+  progression = Progression;
 }

@@ -8,6 +8,13 @@ import { jsonObject, jsonMember } from 'typedjson';
 import { jsonDataMember, jsonDataArrayMember } from '../utility/json-data-member';
 import { Language, Languages } from '../data/language';
 import { group } from '../utility/functions';
+import { DamageType, DamageTypes } from '../data/damage-type';
+import { PowerSet, PowerSets } from '../data/power-set';
+import { MainPower, MainPowers } from '../data/main-power';
+import { AncillaryPower, AncillaryPowers } from '../data/ancillary-power';
+import { Progression, Level } from '../data/leveling';
+import { Features } from '../utility/enum';
+import { TitleCasePipe } from '@angular/common';
 
 @jsonObject
 @Reflect.metadata("name", "Character")
@@ -19,26 +26,25 @@ export class Character extends Entity {
   }
 
   @jsonMember name?: string;
-  @jsonMember level: number = 1;
-  get proficiency(): number { return 2 + Math.floor((this.level - 1) / 4); }
-
-  @jsonMember health: number;
-  get maxHealth(): number {
-    if (!this.archetype) return undefined;
-
-    return this.level * (Number.parseInt(this.archetype.recoveryDice.slice(2)) + this.getMod("Vitality"));
+  @jsonMember({ name: "level" })
+  private _level: number = 1;
+  get level(): number { return this._level; }
+  set level(value: number) {
+    this._level = Math.min(Math.max(1, value), 20);
+    
+    var ancillaryCount = (this.levelFeatures[Features.Ancillary] || []).length;
+    this.ancillaryPowers = this.ancillaryPowers.splice(ancillaryCount);
   }
-  @jsonMember tempHealth: number = 0;
+  get proficiency(): number { return 2 + Math.floor((this.level - 1) / 4); }  
+  get levelFeatures(): Level {
+    return Progression.slice(0, this.level - 1).reduce((a, b) => {
+      for (let key in b) {
+        a[key] = (a[key] || []).concat(b[key]);
+      }
 
-  @jsonMember stamina: number;
-  get maxStamina(): number {
-    return Math.max(3, this.level + this.getMod("Swiftness"));
+      return a;
+    }, (<Level>{}));
   }
-
-  get defense(): number { return 10 + this.getMod("Vitality"); }
-
-  get fortitude(): number { return 8 + this.getMod("Ego"); }
-
 
   @jsonDataMember(Origins)
   private _origin?: Origin;
@@ -86,10 +92,6 @@ export class Character extends Entity {
   @jsonDataArrayMember(Languages)
   languages: Language[] = [];
 
-  @jsonMember realName?: string;
-  @jsonMember hometown?: string;
-  @jsonMember dayJob?: string;
-
   @jsonDataMember(Alignments)
   alignment?: Alignment;
 
@@ -99,10 +101,10 @@ export class Character extends Entity {
   set archetype(value: Archetype) {
     if (this.archetype && value) {
       if (this.archetype.primaryPower !== value.primaryPower) {
-        this.primaryPower = undefined;
+        this.primaryPowerSet = undefined;
       }
       if (this.archetype.secondaryPower !== value.secondaryPower) {
-        this.secondaryPower = undefined;
+        this.secondaryPowerSet = undefined;
       }
     }
 
@@ -121,11 +123,55 @@ export class Character extends Entity {
 
     return array.join(", ");
   }
-  @jsonMember primaryPower?: string;
-  @jsonMember secondaryPower?: string;
+
+  @jsonDataMember(PowerSets)
+  primaryPowerSet?: PowerSet;
+  public primaryPowers(): MainPower[] {
+    if (!this.primaryPowerSet) return [];
+
+    var primarySet = MainPowers.byCategory[this.primaryPowerSet.name];
+
+    return this.levelFeatures[Features.PrimaryPower].map((i: number) => primarySet[i - 1]);
+  }  
+  
+  @jsonDataMember(PowerSets)
+  secondaryPowerSet?: PowerSet;
+  public secondaryPowers(): MainPower[] {
+    if (!this.secondaryPowerSet) return [];
+
+    var secondarySet = MainPowers.byCategory[this.secondaryPowerSet.name];
+
+    return this.levelFeatures[Features.SecondaryPower].map((i: number) => secondarySet[i - 1]);
+  }
+
+  rangeDisplay(power: MainPower): string {
+    var display = power.range.toString();
+
+    if (typeof power.range === "number") display += "ft";
+
+    if (power.area) {
+      display += ` (${power.area.size}ft ${new TitleCasePipe().transform(power.area.type)})`;
+    }
+
+    return display;
+  }
+
+  damageDisplay(power: MainPower): string {
+    var scale = (power.damage.scale.concat([])).reverse().find(s => s.level <= this.level)
+
+    return `${scale.die[0]}d${scale.die[1]} ${power.damage.type}`;
+  }
+
+  @jsonDataArrayMember(AncillaryPowers)
+  ancillaryPowers: AncillaryPower[] = [];
 
   @jsonDataMember(TraversalPowers)
   traversal?: TraversalPower;
+
+  @jsonDataMember(DamageTypes)
+  weakness?: DamageType;
+  @jsonDataMember(DamageTypes)
+  presence?: DamageType;
 
   @jsonMember stats: { [stat: string]: number } = {};
   getStat(stat: string): number {
@@ -157,4 +203,25 @@ export class Character extends Entity {
       this.origin.proficiencyOptions.indexOf(skill) > -1 &&
       this.origin.proficiencyOptions.filter(s => this.skills[s]).length < this.origin.proficiencyCount;
   }
+
+  @jsonMember health: number;
+  get maxHealth(): number {
+    if (!this.archetype) return undefined;
+
+    return this.level * (Number.parseInt(this.archetype.recoveryDice.slice(2)) + this.getMod("Vitality"));
+  }
+  @jsonMember tempHealth: number = 0;
+
+  @jsonMember stamina: number;
+  get maxStamina(): number {
+    return Math.max(3, this.level + this.getMod("Swiftness"));
+  }
+
+  get defense(): number { return 10 + this.getMod("Vitality"); }
+
+  get fortitude(): number { return 8 + this.getMod("Ego"); }
+
+  @jsonMember realName?: string;
+  @jsonMember hometown?: string;
+  @jsonMember dayJob?: string;
 }

@@ -5,5 +5,5 @@ export const SkillMap: { [skill: string]: string[] } = {
   "Vitality": ["Balance", "Concentration", "Resolve"],
   "Intelligence": ["Ancient History", "Arcana", "Investigation", "Modern History", "Pop Culture", "Religion", "Technology"],
   "Ego": ["Animal Handling", "Insight", "Medicine", "Perception", "Tracking"],
-  "Charisma": ["Bluff", "Diplomacy", "Intimidation"]
+  "Charisma": ["Bluff", "Diplomacy", "Intimidation", "Persuasion", "Quips"]
 }

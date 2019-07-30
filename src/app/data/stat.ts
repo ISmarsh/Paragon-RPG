@@ -1,6 +1,8 @@
 import { Data } from './data';
 
-export type Stat = Data & {
+export type StatName = "Might" | "Swiftness" | "Vitality" | "Intelligence" | "Ego" | "Charisma"
+
+export type Stat = Data<StatName> & {
   description: string;
 };
 

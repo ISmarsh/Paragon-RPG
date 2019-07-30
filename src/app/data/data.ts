@@ -1,3 +1,3 @@
-export type Data =
-  { name: string; }
+export type Data<T = string> =
+  { name: T; }
 ;

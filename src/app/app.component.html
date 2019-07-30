@@ -18,7 +18,7 @@
   </div>
   
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="card form-group">
         <div class="card-header">
           Origin
@@ -74,7 +74,7 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-6">
       <div class="card form-group">
         <div class="card-header">
           Alignment
@@ -96,7 +96,9 @@
         <ul class="list-group list-group-flush">
           <li class="list-group-item">
             <select name="archetype" [(ngModel)]="character.archetype" class="form-control">
-              <option *ngFor="let option of archetypes" [ngValue]="option">{{option.name}}</option>
+              <option *ngFor="let option of archetypes" [ngValue]="option">
+                {{option.name}} ({{option.primaryPower}}/{{option.secondaryPower}})
+              </option>
             </select>
             <div *ngIf="character.archetype" class="mt-2">
               {{character.archetype.description}}
@@ -111,40 +113,198 @@
               {{character.archetypeStatDisplay()}}
             </li>
             <li class="list-group-item">
-              <b>Powers: </b>{{character.archetype.primaryPower}}/{{character.archetype.secondaryPower}}
+              <label for="primaryPowerSet">Primary Power ({{character.archetype.primaryPower}}):</label>
+              <select id="primaryPowerSet" name="primaryPowerSet" class="form-control" [(ngModel)]="character.primaryPowerSet">
+                <option *ngFor="let powerSet of powerSets.byCategory[character.archetype.primaryPower] | filter:'primary'" [ngValue]="powerSet">
+                  {{powerSet.name}}
+                </option>
+              </select>
+            </li>
+            <li class="list-group-item">
+              <label for="secondaryPowerSet">Secondary Power ({{character.archetype.secondaryPower}}):</label>
+              <select id="secondaryPowerSet" name="secondaryPowerSet" class="form-control" [(ngModel)]="character.secondaryPowerSet">
+                <option *ngFor="let powerSet of powerSets.byCategory[character.archetype.secondaryPower] | filter:'secondary'" [ngValue]="powerSet">
+                  {{powerSet.name}}
+                </option>
+              </select>
             </li>
             <li class="list-group-item">
               <b>Recovery/Endurance Dice: </b>{{character.archetype.recoveryDice}}/{{character.archetype.enduranceDice}}
             </li>
           </ng-container>
         </ul>
-      </div>
-  
-      <div class="card form-group">
-        <div class="card-header">
-          Traversal
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <select name="traversal" [(ngModel)]="character.traversal" class="form-control">
-              <option *ngFor="let option of traversalPowers" [ngValue]="option">{{option.name}}</option>
-            </select>
-          </li>
-          <ng-container *ngIf="character.traversal">
-            <li *ngFor="let item of character.traversal.abilities" class="list-group-item">
-              <b>{{item.name}}: </b>{{item.description}}
-            </li>
-          </ng-container>
-        </ul>
-      </div>
+      </div>        
     </div>
   </div>
   
   <div class="row">
-    <!-- <div class="col-lg-4 order-lg-2">
+    <div class="col-lg-6 order-lg-2">
+      <div class="row">
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group">
+            <div class="card-header">
+              Traversal
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <select name="traversal" [(ngModel)]="character.traversal" class="form-control">
+                  <option *ngFor="let option of traversalPowers" [ngValue]="option">{{option.name}}</option>
+                </select>
+              </li>
+              <ng-container *ngIf="character.traversal">
+                <li *ngFor="let item of character.traversal.abilities" class="list-group-item">
+                  <b>{{item.name}}: </b>{{item.description}}
+                </li>
+              </ng-container>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group">
+            <div class="card-header text-center">
+              Weakness and Presence
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <div class="form-group mb-2">
+                  <label for="weakness">Weakness (Damage &times;2)</label>
+                  <select id="weakness" name="weakness" [(ngModel)]="character.weakness" class="form-control">
+                    <option *ngFor="let type of damageTypes" [ngValue]="type">{{type.name}}</option>
+                  </select>
+                </div>    
+                <div *ngIf="character.weakness">{{character.weakness.description}}</div>
+              </li>
+              <li class="list-group-item">
+                <div class="form-group mb-2">
+                  <label for="presence">Presence (Damage &times;0)</label>
+                  <select id="presence" name="presence" [(ngModel)]="character.presence" class="form-control">
+                    <option *ngFor="let type of damageTypes | filter:[damageTypes.byName['Physical']]" [ngValue]="type">{{type.name}}</option>
+                  </select>
+                </div>    
+                <div *ngIf="character.presence">{{character.presence.description}}</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group">
+            <div class="card-header text-center">
+              Health
+            </div>
+            <table class="table border-bottom mb-0">
+              <tbody>
+                <tr> 
+                  <td class="border-right">Recovery</td>
+                  <td class="text-right">{{character.archetype.recoveryDice}}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Vitality</td>
+                  <td class="text-right mod" [class.negative]="character.getMod('Vitality') < 0">{{
+                    character.getMod("Vitality") | abs
+                  }}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Level</td>
+                  <td class="text-right">&times;{{character.level}}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Total</td>
+                  <td class="text-right">{{character.maxHealth}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group">
+            <div class="card-header text-center">
+              Stamina
+            </div>
+            <table class="table border-bottom mb-0">
+              <tbody>
+                <tr> 
+                  <td class="border-right">Level</td>
+                  <td class="text-right">{{character.level}}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Swiftness</td>
+                  <td class="text-right mod" [class.negative]="character.getMod('Swiftness') < 0">{{
+                    character.getMod("Swiftness") | abs
+                  }}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Minimum</td>
+                  <td class="text-right">&and;3</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Total</td>
+                  <td class="text-right">{{character.maxStamina}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group">
+            <div class="card-header text-center">
+              Defense
+            </div>
+            <table class="table border-bottom mb-0">
+              <tbody>
+                <tr> 
+                  <td class="border-right">Base</td>
+                  <td class="text-right">10</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Vitality</td>
+                  <td class="text-right mod" [class.negative]="character.getMod('Vitality') < 0">{{
+                    character.getMod("Vitality") | abs
+                  }}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Misc. Bonus</td>
+                  <td class="text-right">+0</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Total</td>
+                  <td class="text-right">{{character.defense}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group">
+            <div class="card-header text-center">
+              Fortitude
+            </div>
+            <table class="table border-bottom mb-0">
+              <tbody>
+                <tr> 
+                  <td class="border-right">Base</td>
+                  <td class="text-right">8</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Ego</td>
+                  <td class="text-right mod" [class.negative]="character.getMod('Ego') < 0">{{
+                    character.getMod("Ego") | abs
+                  }}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Misc. Bonus</td>
+                  <td class="text-right">+0</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Total</td>
+                  <td class="text-right">{{character.fortitude}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="col-lg-8 order-lg-1"> -->
-    <div class="col-lg-8">
+    <div class="col-lg-6 order-lg-1">
       <div class="card form-group">
         <table class="table text-center mb-0">
           <thead class="border-top-0">
@@ -229,126 +389,41 @@
         </table>    
       </div>
     </div>
-    <div class="col-lg-4">
-      <div class="row">
-        <div class="col-6 col-lg-12">
-          <div class="card form-group">
-            <div class="card-header text-center">
-              Health
-            </div>
-            <table class="table border-bottom mb-0">
-              <tbody>
-                <tr> 
-                  <td class="border-right">Recovery</td>
-                  <td class="text-right">{{character.archetype.recoveryDice}}</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Vitality</td>
-                  <td class="text-right mod" [class.negative]="character.getMod('Vitality') < 0">{{
-                    character.getMod("Vitality") | abs
-                  }}</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Level</td>
-                  <td class="text-right">&times;{{character.level}}</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Total</td>
-                  <td class="text-right">{{character.maxHealth}}</td>
-                </tr>
-              </tbody>
-            </table>
+  </div>
+  
+  <div class="row form-group">
+    <ng-container *ngFor="let tuple of [['Primary Powers', character.primaryPowers()], ['Secondary Powers', character.secondaryPowers()]]">
+      <div class="col">
+        <div class="card">
+          <div class="card-header">
+            {{tuple[0]}}
           </div>
-        </div>
-        <div class="col-6 col-lg-12">
-          <div class="card form-group">
-            <div class="card-header text-center">
-              Stamina
-            </div>
-            <table class="table border-bottom mb-0">
-              <tbody>
-                <tr> 
-                  <td class="border-right">Level</td>
-                  <td class="text-right">{{character.level}}</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Swiftness</td>
-                  <td class="text-right mod" [class.negative]="character.getMod('Swiftness') < 0">{{
-                    character.getMod("Swiftness") | abs
-                  }}</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Minimum</td>
-                  <td class="text-right">&and;3</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Total</td>
-                  <td class="text-right">{{character.maxStamina}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="col-6 col-lg-12">
-          <div class="card form-group">
-            <div class="card-header text-center">
-              Defense
-            </div>
-            <table class="table border-bottom mb-0">
-              <tbody>
-                <tr> 
-                  <td class="border-right">Base</td>
-                  <td class="text-right">10</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Vitality</td>
-                  <td class="text-right mod" [class.negative]="character.getMod('Vitality') < 0">{{
-                    character.getMod("Vitality") | abs
-                  }}</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Misc. Bonus</td>
-                  <td class="text-right">+0</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Total</td>
-                  <td class="text-right">{{character.defense}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="col-6 col-lg-12">
-          <div class="card form-group">
-            <div class="card-header text-center">
-              Fortitude
-            </div>
-            <table class="table border-bottom mb-0">
-              <tbody>
-                <tr> 
-                  <td class="border-right">Base</td>
-                  <td class="text-right">8</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Ego</td>
-                  <td class="text-right mod" [class.negative]="character.getMod('Ego') < 0">{{
-                    character.getMod("Ego") | abs
-                  }}</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Misc. Bonus</td>
-                  <td class="text-right">+0</td>
-                </tr>
-                <tr> 
-                  <td class="border-right">Total</td>
-                  <td class="text-right">{{character.fortitude}}</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let power of tuple[1]">
+              <div class="card">
+                <div class="card-header">
+                  {{power.name}}
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">                    
+                    <b>Range: </b>{{character.rangeDisplay(power)}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Activation: </b>{{power.activation}}, {{power.stamina}} Stamina
+                  </li>
+                  <li class="list-group-item" *ngIf="power.damage">
+                    <b>Damage: </b>{{character.damageDisplay(power)}}
+                  </li>
+                  <li class="list-group-item">
+                    {{power.description}}
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
         </div>
       </div>
-    </div>
+    </ng-container>
   </div>
   
   <div class="row">
