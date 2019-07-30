@@ -1,7 +1,7 @@
 
-import { Index } from '../data/collection';
-import { Data } from '../data/data';
-import { compose } from './functions';
+import { Index } from '../classes';
+import { Data } from "../types";
+import { compose } from '../functions';
 import { jsonMember, jsonArrayMember } from 'typedjson';
 import { IJsonMemberOptions } from 'typedjson/js/typedjson/json-member';
 import { IJsonArrayMemberOptions } from 'typedjson/js/typedjson/json-array-member';

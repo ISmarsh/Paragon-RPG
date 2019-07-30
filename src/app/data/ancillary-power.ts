@@ -1,5 +1,5 @@
-import { Data } from './data';
-import { Index } from './collection';
+import { Data } from "../core/types";
+import { Index } from '../core/classes';
 import { StatName } from './stat';
 
 export type AncillaryPower = Data & {

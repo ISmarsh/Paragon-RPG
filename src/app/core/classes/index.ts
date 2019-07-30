@@ -1,4 +1,4 @@
-import { Data } from './data';
+import { Data } from "../types";
 
 export class Index<T extends Data> extends Array<T> {
   constructor(...values: T[]) {

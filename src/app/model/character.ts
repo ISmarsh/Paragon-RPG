@@ -5,15 +5,15 @@ import { Stats } from '../data/stat';
 import { Entity } from './entity';
 import { Alignment, Alignments } from '../data/alignment';
 import { jsonObject, jsonMember } from 'typedjson';
-import { jsonDataMember, jsonDataArrayMember } from '../utility/json-data-member';
+import { jsonDataMember, jsonDataArrayMember } from '../core/decorators/json-data-member';
 import { Language, Languages } from '../data/language';
-import { group } from '../utility/functions';
+import { group } from '../core/functions';
 import { DamageType, DamageTypes } from '../data/damage-type';
 import { PowerSet, PowerSets } from '../data/power-set';
 import { MainPower, MainPowers } from '../data/main-power';
 import { AncillaryPower, AncillaryPowers } from '../data/ancillary-power';
 import { Progression, Level } from '../data/leveling';
-import { Features } from '../utility/enum';
+import { Features } from '../core/enums';
 import { TitleCasePipe } from '@angular/common';
 
 @jsonObject

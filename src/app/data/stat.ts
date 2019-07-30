@@ -1,4 +1,4 @@
-import { Data } from './data';
+import { Data } from "../core/types";
 
 export type StatName = "Might" | "Swiftness" | "Vitality" | "Intelligence" | "Ego" | "Charisma"
 

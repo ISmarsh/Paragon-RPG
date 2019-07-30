@@ -1,5 +1,5 @@
-import { Data } from './data';
-import { CategoryIndex, Index } from './collection';
+import { Data } from "../core/types";
+import { CategoryIndex, Index } from '../core/classes';
 
 export type Language = Data & {
   speakers: string[];

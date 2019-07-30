@@ -1,5 +1,5 @@
-import { CategoryIndex } from './collection';
-import { Data } from './data';
+import { CategoryIndex } from '../core/classes';
+import { Data } from "../core/types";
 
 export type DamageType = Data & {
   description: string;

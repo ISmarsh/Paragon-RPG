@@ -1,6 +1,6 @@
-import { Data } from './data';
-import { CategoryIndex } from './collection';
-import { Die } from '../utility/types';
+import { Data } from "../core/types";
+import { CategoryIndex } from '../core/classes';
+import { Die } from '../core/types';
 
 export type MainPower = Data & {
   activation: 'Free' | 'Act' | 'React';

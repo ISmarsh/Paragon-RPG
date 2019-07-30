@@ -1,6 +1,6 @@
 import { Entity } from './entity';
 import { TypedJSON } from 'typedjson';
-import { Ctor, Path } from '../utility/types';
+import { Ctor, Path } from '../core/types';
 
 export abstract class Repository {
   public static save<T extends Entity>(type: Ctor<T>, item: T, ...path: Path): T {

@@ -4,9 +4,9 @@ import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SignedPipe } from './pipes/signed.pipe';
-import { AbsPipe } from './pipes/abs.pipe';
-import { FilterPipe } from './pipes/filter.pipe';
+import { SignedPipe } from './core/pipes/signed.pipe';
+import { AbsPipe } from './core/pipes/abs.pipe';
+import { FilterPipe } from './core/pipes/filter.pipe';
 
 @NgModule({
   declarations: [
