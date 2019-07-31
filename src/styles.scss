@@ -1,1 +1,28 @@
 /* You can add global styles to this file, and also import other style files */
+
+label, select, option, .card-header {
+  font-weight: bold !important;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
+label.custom-control-label:empty {
+  &::before, &::after {
+    left: -1.25rem;
+  }
+}
+
+.mod {
+  margin-left: -1ch !important;
+  
+  &.negative::before {
+    content: '-';
+  }
+  &:not(.negative)::before {
+    content: '+';
+  }
+}
