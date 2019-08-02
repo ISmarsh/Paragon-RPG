@@ -37,7 +37,7 @@ export class Character extends Entity {
   }
   get proficiency(): number { return 2 + Math.floor((this.level - 1) / 4); }  
   get levelFeatures(): Level {
-    return Progression.slice(0, this.level - 1).reduce((a, b) => {
+    return Progression.slice(0, this.level).reduce((a, b) => {
       for (let key in b) {
         a[key] = (a[key] || []).concat(b[key]);
       }

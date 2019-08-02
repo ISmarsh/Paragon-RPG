@@ -25,7 +25,7 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Fire Control",
-      "primary": false,
+      "primary": true,
       "secondary": false
     },
     {
@@ -55,7 +55,7 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Plant Control",
-      "primary": false,
+      "primary": true,
       "secondary": false
     },
     {
@@ -82,8 +82,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Darkness Melee",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Dual Weapon Fighting",
@@ -122,8 +122,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Martial Arts",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Psionic Melee",
@@ -194,8 +194,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Robots",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Thugs",
@@ -281,8 +281,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Web Shooter",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Wind Blast",
@@ -318,8 +318,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Kinetics",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Leadership",
@@ -348,8 +348,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Size Manipulation",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Sonic Resonance",
@@ -385,8 +385,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Dark Shroud",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Earth Armor",

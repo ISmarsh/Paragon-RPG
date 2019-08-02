@@ -1,23 +1,28 @@
-<form>
-    <div class="row pt-5">
-      <div class="col-md-4">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input id="name" name="name" [(ngModel)]="character.name" type="text" class="form-control" autofocus>
+<form>  
+  <div class="border-bottom">
+    <div class="container">
+      <div class="row pt-4">
+        <div class="col-sm-9 col-md-6">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input id="name" name="name" [(ngModel)]="character.name" type="text" class="form-control" autofocus>
+          </div>
         </div>
-      </div>
-      <div class="col-md-2">
-        <div class="form-group">
-          <label for="level">Level</label>
-          <input id="level" name="level" [(ngModel)]="character.level" type="number" min="1" max="20" class="form-control">
+        <div class="col-sm-3 col-md-2">
+          <div class="form-group">
+            <label for="level">Level</label>
+            <input id="level" name="level" [(ngModel)]="character.level" type="number" min="1" max="20" class="form-control">
+          </div>
         </div>
+        <!-- <div class="col align-self-end d-flex">
+          <button (click)="save()" class="btn btn-primary form-group ml-auto">Save</button>
+        </div> -->
       </div>
-      <!-- <div class="col align-self-end d-flex">
-        <button (click)="save()" class="btn btn-primary form-group ml-auto">Save</button>
-      </div> -->
     </div>
-    
-    <div class="row">
+  </div>
+  
+  <div class="container">
+    <div class="row pt-3">
       <div class="col-md-6">
         <div class="card form-group">
           <div class="card-header">
@@ -419,6 +424,55 @@
                     </li>
                   </ul>
                 </div>
+                <div class="card mt-2" *ngIf="power.minion">
+                  <div class="card-header">
+                    Minion: {{power.minion.name}}
+                  </div>
+                  <table class="table table-bordered mb-0">
+                    <tbody>
+                      <tr>
+                        <th colspan="3">Health</th>
+                        <td colspan="3">{{power.minion.health}}</td>
+                        <th colspan="3">Speed</th>
+                        <td colspan="3">{{power.minion.speed}}ft</td>
+                      </tr>
+                      <tr>
+                        <th colspan="3">Defense</th>
+                        <td colspan="3">{{power.minion.defense}}</td>
+                        <th colspan="3">Fortitude</th>
+                        <td colspan="3">{{power.minion.fortitude}}</td>
+                      </tr>
+                      <tr>
+                        <th colspan="2">MIG</th>
+                        <td colspan="2">{{power.minion.might}}</td>
+                        <th colspan="2">SWI</th>
+                        <td colspan="2">{{power.minion.swiftness}}</td>
+                        <th colspan="2">VIT</th>
+                        <td colspan="2">{{power.minion.vitality}}</td>
+                      </tr>
+                      <tr>
+                        <th colspan="2">INT</th>
+                        <td colspan="2">{{power.minion.intelligence}}</td>
+                        <th colspan="2">EGO</th>
+                        <td colspan="2">{{power.minion.ego}}</td>
+                        <th colspan="2">CHA</th>
+                        <td colspan="2">{{power.minion.charisma}}</td>
+                      </tr>
+                      <tr>
+                        <th colspan="3">Weaknesses</th>
+                        <td colspan="3">{{power.minion.weaknesses}}</td>
+                        <th colspan="3">Presences</th>
+                        <td colspan="3">{{power.minion.presences}}</td>
+                      </tr>
+                      <tr>
+                        <td colspan="12">
+                          <b>Acts:</b>
+                          <div *ngFor="let act of power.minion.acts">{{act}}</div>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </li>
             </ul>
           </div>
@@ -449,5 +503,6 @@
     
     <div class="row">
       <div class="col"></div>
-    </div>  
-  </form>
+    </div>
+  </div>
+</form>
