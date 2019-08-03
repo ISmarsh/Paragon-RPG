@@ -26,11 +26,12 @@ export class Character extends Entity {
   }
 
   @jsonMember name?: string;
+
   @jsonMember({ name: "level" })
   private _level: number = 1;
   get level(): number { return this._level; }
   set level(value: number) {
-    this._level = Math.min(Math.max(1, value), 20);
+    this._level = Math.min(Math.max(1, value), 30);
     
     var ancillaryCount = (this.levelFeatures[Features.Ancillary] || []).length;
     this.ancillaryPowers = this.ancillaryPowers.splice(ancillaryCount);
@@ -224,4 +225,24 @@ export class Character extends Entity {
   @jsonMember realName?: string;
   @jsonMember hometown?: string;
   @jsonMember dayJob?: string;
+
+  @jsonMember nationality?: string;
+  @jsonMember skinColor?: string;
+  @jsonMember hairColor?: string;
+
+  @jsonMember eyeColor?: string;
+  @jsonMember height?: string;
+  @jsonMember weight?: string;
+
+  @jsonMember tattoos?: string;
+  @jsonMember beauty?: number;
+  @jsonMember age?: number;
+
+  @jsonMember casualAttire?: string;
+  @jsonMember costumeAttire?: string;
+  @jsonMember inventory?: string;
+  @jsonMember personality?: string;
+  @jsonMember flaws?: string;
+  @jsonMember allies?: string;
+  @jsonMember enemies?: string;
 }

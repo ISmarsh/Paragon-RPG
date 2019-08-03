@@ -19,4 +19,126 @@
       </div>
     </div>
   </div>
+  <div class="row" data-scroll-target>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="nationality">Nationality</label>
+        <input id="nationality" name="nationality" [(ngModel)]="character.nationality" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="skinColor">Skin Color</label>
+        <input id="skinColor" name="skinColor" [(ngModel)]="character.skinColor" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="hairColor">Hair Color</label>
+        <input id="hairColor" name="hairColor" [(ngModel)]="character.hairColor" type="text" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="row" data-scroll-target>
+    <div class="col-md-4">
+      <div class="form-group">
+        <label for="eyeColor">Eye Color</label>
+        <input id="eyeColor" name="eyeColor" [(ngModel)]="character.eyeColor" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="form-group">
+        <label for="height">Height</label>
+        <input id="height" name="height" [(ngModel)]="character.height" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="col-6 col-md-4">
+      <div class="form-group">
+        <label for="weight">Weight</label>
+        <input id="weight" name="weight" [(ngModel)]="character.weight" type="text" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="row" data-scroll-target>
+    <div class="col-md-8">
+      <div class="form-group">
+        <label for="tattoos">Marks/Tattoos</label>
+        <input id="tattoos" name="tattoos" [(ngModel)]="character.tattoos" type="text" class="form-control">
+      </div>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="form-group">
+        <label for="beauty">Beauty</label>
+        <input id="beauty" name="beauty" [(ngModel)]="character.beauty" type="number" class="form-control">
+      </div>
+    </div>
+    <div class="col-6 col-md-2">
+      <div class="form-group">
+        <label for="age">Age</label>
+        <input id="age" name="age" [(ngModel)]="character.age" type="number" class="form-control">
+      </div>
+    </div>
+  </div>
+  <div class="row" data-scroll-target>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="casualAttire">Casual Attire</label>
+        <textarea id="casualAttire" name="casualAttire" [(ngModel)]="character.casualAttire" type="text" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="costumeAttire">Costume Attire</label>
+        <textarea id="costumeAttire" name="costumeAttire" [(ngModel)]="character.costumeAttire" type="text" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row" data-scroll-target>
+    <div class="col-md-6">
+      <div class="card form-group">
+        <div class="card-header">
+          Origin Equipment
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item" *ngFor="let item of character.origin.equipment">
+            {{item}}
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="inventory">Equipment/Money</label>
+        <textarea id="inventory" name="inventory" [(ngModel)]="character.inventory" type="text" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row" data-scroll-target>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="personality">Personality</label>
+        <textarea id="personality" name="personality" [(ngModel)]="character.personality" type="text" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="flaws">Flaws</label>
+        <textarea id="flaws" name="flaws" [(ngModel)]="character.flaws" type="text" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="row" data-scroll-target>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="allies">Allies</label>
+        <textarea id="allies" name="allies" [(ngModel)]="character.allies" type="text" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="form-group">
+        <label for="enemies">Enemies</label>
+        <textarea id="enemies" name="enemies" [(ngModel)]="character.enemies" type="text" class="form-control"></textarea>
+      </div>
+    </div>
+  </div>
 </form>
