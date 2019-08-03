@@ -1,0 +1,209 @@
+<form>
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card form-group">
+        <table class="table text-center mb-0" data-scroll-target>
+          <thead class="border-top-0">
+            <tr>
+              <th scope="col" class="border-top-0 border-right">Stat</th>
+              <th scope="col" class="border-top-0 text-left">Skill</th>
+              <th scope="col" class="border-top-0 px-0">  Prof</th>
+              <th scope="col" class="border-top-0 text-right">Mod</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let stat of stats; index as i">
+              <tr *ngFor="let skill of skillMap[stat.name] as skills; index as j">
+                <td *ngIf="j === 0" [attr.rowspan]="skills.length" class="p-0 border-right">
+                  <table class="table border-bottom mb-0">
+                    <thead>
+                      <tr>
+                        <th scope="col" colspan="2">
+                          <label for="stat{{i}}" class="mb-0">{{
+                            stat.name
+                          }}</label>
+                        </th>
+                      </tr>
+                    </thead>
+                    <tbody class="text-left">
+                      <tr>
+                        <td class="align-middle border-right">
+                          Base
+                        </td>
+                        <td class="p-0">
+                          <input 
+                            id="stat{{i}}" name="stat{{i}}" class="form-control py-4 text-right" 
+                            [(ngModel)]="character.stats[stat.name]" type="number" min="3" max="20"
+                          >
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="border-right">
+                          ASI
+                        </td>
+                        <td class="mod text-right">{{
+                          character.getStatIncrease(stat.name)
+                        }}</td>
+                      </tr>
+                      <tr>
+                        <td class="border-right">
+                          Total
+                        </td>
+                        <td class="text-right">{{
+                          character.getStat(stat.name)
+                        }}</td>
+                      </tr>
+                      <tr>
+                        <td class="border-right">
+                          Mod.
+                        </td>
+                        <td *ngIf="character.stats[stat.name]" class="mod text-right" [class.negative]="character.getMod(stat.name) < 0">{{
+                          character.getMod(stat.name) | abs
+                        }}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td class="text-left">{{skill}}</td>
+                <td class="px-0">
+                  <div class="d-flex justify-content-center">
+                    <div class="custom-control custom-checkbox">
+                      <input 
+                        type="checkbox" class="custom-control-input" id="{{skill}}" name="{{skill}}"
+                        [(ngModel)]="character.skills[skill]" [disabled]="!character.canBeProficient(skill)"
+                      >
+                      <label class="custom-control-label" for="{{skill}}"></label>
+                    </div>
+                  </div>
+                </td>
+                <td class="text-right">
+                  <span *ngIf="character.stats[stat.name]">{{character.getMod(stat.name, skill) | signed}}</span>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>    
+      </div>
+    </div>
+    <div class="col-lg-4">
+      <div class="row">
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group" data-scroll-target>
+            <div class="card-header text-center">
+              Health
+            </div>
+            <table class="table border-bottom mb-0">
+              <tbody>
+                <tr> 
+                  <td class="border-right">Recovery</td>
+                  <td class="text-right">{{character.archetype.recoveryDice}}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Vitality</td>
+                  <td class="text-right mod" [class.negative]="character.getMod('Vitality') < 0">{{
+                    character.getMod("Vitality") | abs
+                  }}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Level</td>
+                  <td class="text-right">&times;{{character.level}}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Total</td>
+                  <td class="text-right">{{character.maxHealth}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group">
+            <div class="card-header text-center">
+              Stamina
+            </div>
+            <table class="table border-bottom mb-0">
+              <tbody>
+                <tr> 
+                  <td class="border-right">Level</td>
+                  <td class="text-right">{{character.level}}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Swiftness</td>
+                  <td class="text-right mod" [class.negative]="character.getMod('Swiftness') < 0">{{
+                    character.getMod("Swiftness") | abs
+                  }}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Minimum</td>
+                  <td class="text-right">&and;3</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Total</td>
+                  <td class="text-right">{{character.maxStamina}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group">
+            <div class="card-header text-center">
+              Defense
+            </div>
+            <table class="table border-bottom mb-0">
+              <tbody>
+                <tr> 
+                  <td class="border-right">Base</td>
+                  <td class="text-right">10</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Vitality</td>
+                  <td class="text-right mod" [class.negative]="character.getMod('Vitality') < 0">{{
+                    character.getMod("Vitality") | abs
+                  }}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Misc. Bonus</td>
+                  <td class="text-right">+0</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Total</td>
+                  <td class="text-right">{{character.defense}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-12">
+          <div class="card form-group">
+            <div class="card-header text-center">
+              Fortitude
+            </div>
+            <table class="table border-bottom mb-0">
+              <tbody>
+                <tr> 
+                  <td class="border-right">Base</td>
+                  <td class="text-right">8</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Ego</td>
+                  <td class="text-right mod" [class.negative]="character.getMod('Ego') < 0">{{
+                    character.getMod("Ego") | abs
+                  }}</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Misc. Bonus</td>
+                  <td class="text-right">+0</td>
+                </tr>
+                <tr> 
+                  <td class="border-right">Total</td>
+                  <td class="text-right">{{character.fortitude}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

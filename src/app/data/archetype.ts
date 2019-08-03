@@ -78,18 +78,6 @@ export const Archetypes = new Index<Archetype>(
     "enduranceDice": "1d10"
   },
   {
-    "name": "Kheldian",
-    "description": "Kheldians are the fusion of an alien energy being called a Kheldian and a willing host. The fusion of these two beings create a Luminous or Umbral energy source within the body giving a variety of powers ranging from Melee, Range, Tank, and Transformation. Kheldians are always Alien in their Origins.",
-    "inherentAbility": "Cosmic Balance (Kheldian gain a bonus of 1 to all Stats based on their allies within 30 feet according to their Archetype. Brutes and Stalkers increase Might. Blasters and Peacebringers increase Swiftness. Sentinel and Warshades increase Vitality. Defenders and Paragons increase Intelligence. Controllers and Dominators increase Ego. Masterminds and Warlords increase Charisma)",
-    "statIncreases": {
-      "All Stats": 1
-    },
-    "primaryPower": "Peacebringer Offense or Warshade Offense",
-    "secondaryPower": "Peacebringer Defense or Warshade Defense",
-    "recoveryDice": "1d12",
-    "enduranceDice": "1d12"
-  },
-  {
     "name": "Mastermind",
     "description": "The Mastermind excels at using others to do their dirty work. Perhaps they summon demonic creature, undead minions, or beasts of the wild. Perhaps they command mercenaries, ninjas, or thugs. Or perhaps they build deadly robotic creations. They can summon them when needed and order them to do their bidding. They can help support their minions but don’t have much in the way of defenses or offensive capabilities being very vulnerable to direct confrontation.",
     "inherentAbility": "Supremacy (While your minions are within 30 feet of you they gain 10 temporary Health and Bosses can Act twice on your turn)",

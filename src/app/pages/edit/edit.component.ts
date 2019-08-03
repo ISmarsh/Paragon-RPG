@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild, OnDestroy } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { Character } from '../../model/character';
@@ -14,18 +14,25 @@ import { SkillMap } from '../../data/stat-skill-map';
 import { Repository } from '../../model/repository';
 import { DamageTypes } from '../../data/damage-type';
 import { Progression } from '../../data/leveling';
+import { CharacterService } from 'src/app/core/services/character.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-edit',
   templateUrl: './edit.component.html',
   styleUrls: ['./edit.component.scss']
 })
-export class EditComponent implements OnInit, AfterViewInit {
-  ngOnInit(): void {
-    this.character = Repository.get(Character)[0] || new Character();
+export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
+  constructor(
+    private service: CharacterService
+  ) { 
+    this.subscriptions.push(this.service.current.subscribe(c => this.character = c));
   }
 
-  ngAfterViewInit(): void {    
+  ngOnInit(): void {
+  }
+
+  ngAfterViewInit(): void {
     this.characterForm.form.valueChanges.subscribe({
       next: () => {
         //After the change has been applied, save.
@@ -34,21 +41,52 @@ export class EditComponent implements OnInit, AfterViewInit {
     });
   }
 
-  character = new Character();
-  @ViewChild(NgForm, { static: false }) 
+  subscriptions: Subscription[] = [];
+
+  character!: Character;
+  @ViewChild(NgForm, { static: false })
   characterForm: NgForm;
 
-  origins = Origins;
-  languages = Languages;
-  alignments = Alignments;
-  archetypes = Archetypes;
-  powerSets = PowerSets;
-  traversalPowers = TraversalPowers;
-  damageTypes = DamageTypes;
-
-  stats = Stats;
-  skills = Skills;
-  skillMap = SkillMap;
-
   progression = Progression;
+
+  public up(): void {
+    var scrollTargets = document.querySelectorAll("[data-scroll-target]");
+
+    for (let i = scrollTargets.length - 1; i >= 0; i--) {
+      const target = scrollTargets[i];
+      var rect = target.getBoundingClientRect();
+
+      if (rect.top < -1) {
+        
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        return;
+      }
+    }
+
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
+  public down(): void {
+    var scrollTargets = document.querySelectorAll("[data-scroll-target]");
+
+    for (let i = 0; i < scrollTargets.length; i++) {
+      const target = scrollTargets[i];
+      var rect = target.getBoundingClientRect()
+
+      if (rect.top > 1) {
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
+
+        return;
+      }
+    }
+
+    window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => {
+      sub.unsubscribe();
+    });
+  }
 }

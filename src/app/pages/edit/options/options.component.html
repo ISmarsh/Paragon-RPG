@@ -1,0 +1,270 @@
+<form>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card form-group" data-scroll-target>
+        <div class="card-header">
+          Origin
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <select name="origin" [(ngModel)]="character.origin" class="form-control">
+              <option *ngFor="let option of origins" [ngValue]="option">
+                {{option.name}}
+              </option>
+            </select>
+            <div *ngIf="character.origin" class="mt-2">
+                {{character.origin.description}}
+            </div>
+          </li>
+          <ng-container *ngIf="character.origin">
+            <li class="list-group-item">
+              <b>Skills:</b> Choose {{character.origin.proficiencyCount}} from {{character.origin.proficiencyOptions.join(", ")}}
+              <ng-container *ngFor="let skill of character.originSkills() as originSkills; index as i">
+                <select class="form-control mt-2" name="originSkill{{i}}" (change)="character.changeSkill(skill, $event.target.value)">
+                  <option selected>
+                    {{skill}}
+                  </option>
+                  <option *ngFor="let option of character.origin.proficiencyOptions | filter:originSkills">
+                    {{option}}
+                  </option>
+                </select>
+                <div *ngIf="skill" class="mt-2">
+                  {{skills.byName[skill].description}}
+                </div>
+              </ng-container>
+            </li>
+            <li class="list-group-item">
+              <b>Languages:</b> {{character.originLanguageDisplay()}}
+              <ng-container *ngFor="let category of character.origin.languages; index as i">
+                <select name="language{{i}}" [(ngModel)]="character.languages[i]" class="form-control mt-2">
+                  <option *ngFor="let language of languages.byCategory[category]" [ngValue]="language">
+                    {{language.name}}
+                  </option>
+                </select>
+                <div *ngIf="character.languages[i]" class="mt-2">
+                  Speakers: {{character.languages[i].speakers.join(", ")}}
+                </div>
+              </ng-container>
+            </li>
+            <li class="list-group-item">
+              <b>Equipment:</b> {{character.origin.equipment.join(", ")}}
+            </li>
+            <li class="list-group-item">
+              <b>Base Attack:</b> {{character.origin.attack}}
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+      
+      <div class="card form-group">
+        <div class="card-header text-center">
+          Weakness and Presence
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <div class="form-group mb-2">
+              <label for="weakness">Weakness (Damage &times;2)</label>
+              <select id="weakness" name="weakness" [(ngModel)]="character.weakness" class="form-control">
+                <option *ngFor="let type of damageTypes" [ngValue]="type">{{type.name}}</option>
+              </select>
+            </div>    
+            <div *ngIf="character.weakness">{{character.weakness.description}}</div>
+          </li>
+          <li class="list-group-item">
+            <div class="form-group mb-2">
+              <label for="presence">Presence (Damage &times;0)</label>
+              <select id="presence" name="presence" [(ngModel)]="character.presence" class="form-control">
+                <option *ngFor="let type of damageTypes | filter:[damageTypes.byName['Physical']]" [ngValue]="type">{{type.name}}</option>
+              </select>
+            </div>    
+            <div *ngIf="character.presence">{{character.presence.description}}</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card form-group" data-scroll-target>
+        <div class="card-header">
+          Alignment
+        </div>
+        <div class="card-body">
+          <select name="alignment" [(ngModel)]="character.alignment" class="form-control">
+            <option *ngFor="let option of alignments" [ngValue]="option">{{option.name}}</option>
+          </select>
+          <div *ngIf="character.alignment" class="mt-2">
+            {{character.alignment.description}}
+          </div>
+        </div>
+      </div>
+      
+      <div class="card form-group">
+        <div class="card-header">
+          Archetype
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <select name="archetype" [(ngModel)]="character.archetype" class="form-control">
+              <option *ngFor="let option of archetypes" [ngValue]="option">
+                {{option.name}} ({{option.primaryPower}}/{{option.secondaryPower}})
+              </option>
+            </select>
+            <div *ngIf="character.archetype" class="mt-2">
+              {{character.archetype.description}}
+            </div>
+          </li>
+          <ng-container *ngIf="character.archetype">
+            <li class="list-group-item">
+              <b>Inherent Ability: </b>{{character.archetype.inherentAbility}}
+            </li>
+            <li class="list-group-item">
+              <b>Stat Increase: </b>
+              {{character.archetypeStatDisplay()}}
+            </li>
+            <li class="list-group-item">
+              <label for="primaryPowerSet">Primary Power ({{character.archetype.primaryPower}}):</label>
+              <select id="primaryPowerSet" name="primaryPowerSet" class="form-control" [(ngModel)]="character.primaryPowerSet">
+                <option *ngFor="let powerSet of powerSets.byCategory[character.archetype.primaryPower] | filter:'primary'" [ngValue]="powerSet">
+                  {{powerSet.name}}
+                </option>
+              </select>
+            </li>
+            <li class="list-group-item">
+              <label for="secondaryPowerSet">Secondary Power ({{character.archetype.secondaryPower}}):</label>
+              <select id="secondaryPowerSet" name="secondaryPowerSet" class="form-control" [(ngModel)]="character.secondaryPowerSet">
+                <option *ngFor="let powerSet of powerSets.byCategory[character.archetype.secondaryPower] | filter:'secondary'" [ngValue]="powerSet">
+                  {{powerSet.name}}
+                </option>
+              </select>
+            </li>
+            <li class="list-group-item">
+              <b>Recovery/Endurance Dice: </b>{{character.archetype.recoveryDice}}/{{character.archetype.enduranceDice}}
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+
+      <div class="card form-group">
+        <div class="card-header">
+          Traversal
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">
+            <select name="traversal" [(ngModel)]="character.traversal" class="form-control">
+              <option *ngFor="let option of traversalPowers" [ngValue]="option">{{option.name}}</option>
+            </select>
+          </li>
+          <ng-container *ngIf="character.traversal">
+            <li *ngFor="let item of character.traversal.abilities" class="list-group-item">
+              <b>{{item.name}}: </b>{{item.description}}
+            </li>
+          </ng-container>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <ng-container *ngFor="let tuple of [['Primary Powers', character.primaryPowers()], ['Secondary Powers', character.secondaryPowers()]]">
+      <div class="col-md-6">
+        <div class="card form-group" data-scroll-target>
+          <div class="card-header">
+            {{tuple[0]}}
+          </div>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" *ngFor="let power of tuple[1]">
+              <div class="card">
+                <div class="card-header">
+                  {{power.name}}
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">                    
+                    <b>Range: </b>{{character.rangeDisplay(power)}}
+                  </li>
+                  <li class="list-group-item">
+                    <b>Activation: </b>{{power.activation}}, {{power.stamina}} Stamina
+                  </li>
+                  <li class="list-group-item" *ngIf="power.damage">
+                    <b>Damage: </b>{{character.damageDisplay(power)}}
+                  </li>
+                  <li class="list-group-item">
+                    {{power.description}}
+                  </li>
+                </ul>
+              </div>
+              <div class="card mt-2" *ngIf="power.minion">
+                <div class="card-header">
+                  Minion: {{power.minion.name}}
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item px-0 d-flex justify-content-between">
+                    <div class="d-flex justify-content-between w-50 px-3">
+                      <b>Health</b>
+                      {{power.minion.health}}
+                    </div>
+                    <div class="d-flex justify-content-between w-50 px-3">
+                      <b>Speed</b>
+                      {{power.minion.speed}}ft
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0 d-flex justify-content-between">
+                    <div class="d-flex justify-content-between w-50 px-3">
+                      <b>Defense</b>
+                      {{power.minion.defense}}
+                    </div>
+                    <div class="d-flex justify-content-between w-50 px-3">                        
+                      <b>Fortitude</b>
+                      {{power.minion.fortitude}}
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0 d-flex justify-content-between">
+                    <div class="d-flex justify-content-between w-50 px-3">
+                      <b>MIG</b>
+                      {{power.minion.might}}
+                    </div>
+                    <div class="d-flex justify-content-between w-50 px-3">
+                      <b>SWI</b>
+                      {{power.minion.swiftness}}
+                    </div>
+                    <div class="d-flex justify-content-between w-50 px-3">
+                      <b>VIT</b>
+                      {{power.minion.vitality}}
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0 d-flex justify-content-between">
+                    <div class="d-flex justify-content-between w-50 px-3">
+                      <b>INT</b>
+                      {{power.minion.intelligence}}
+                    </div>
+                    <div class="d-flex justify-content-between w-50 px-3">
+                      <b>EGO</b>
+                      {{power.minion.ego}}
+                    </div>
+                    <div class="d-flex justify-content-between w-50 px-3">
+                      <b>CHA</b>
+                      {{power.minion.charisma}}
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0 d-flex justify-content-between">
+                    <div class="d-flex justify-content-between w-100 px-3">
+                      <b>Weaknesses</b>
+                      {{power.minion.weaknesses}}
+                    </div>
+                  </li>
+                  <li class="list-group-item px-0 d-flex justify-content-between">
+                    <div class="d-flex justify-content-between w-100 px-3">
+                      <b>Presences</b>
+                      {{power.minion.presences}}
+                    </div>
+                  </li>
+                  <li class="list-group-item px-3">
+                    <b>Acts:</b>
+                    <div *ngFor="let act of power.minion.acts">{{act}}</div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</form>
