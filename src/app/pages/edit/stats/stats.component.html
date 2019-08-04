@@ -65,16 +65,8 @@
                   </table>
                 </td>
                 <td class="text-left">{{skill}}</td>
-                <td class="px-0">
-                  <div class="d-flex justify-content-center">
-                    <div class="custom-control custom-checkbox">
-                      <input 
-                        type="checkbox" class="custom-control-input" id="{{skill}}" name="{{skill}}"
-                        [(ngModel)]="character.skills[skill]" [disabled]="!character.canBeProficient(skill)"
-                      >
-                      <label class="custom-control-label" for="{{skill}}"></label>
-                    </div>
-                  </div>
+                <td class="text-center">
+                  <i [class]="(character.skills.indexOf(skill) > -1 ? 'fas' : 'far') + ' fa-circle'"></i>
                 </td>
                 <td class="text-right">
                   <span *ngIf="character.stats[stat.name]">{{character.getMod(stat.name, skill) | signed}}</span>
@@ -87,7 +79,7 @@
     </div>
     <div class="col-lg-4">
       <div class="row">
-        <div class="col-md-6 col-lg-12">
+        <div class="col-6 col-lg-12">
           <div class="card form-group" data-scroll-target>
             <div class="card-header text-center">
               Health
@@ -96,7 +88,7 @@
               <tbody>
                 <tr> 
                   <td class="border-right">Recovery</td>
-                  <td class="text-right">{{character.archetype.recoveryDice}}</td>
+                  <td class="text-right">{{(character.archetype || {})['recoveryDice']}}</td>
                 </tr>
                 <tr> 
                   <td class="border-right">Vitality</td>
@@ -116,7 +108,7 @@
             </table>
           </div>
         </div>
-        <div class="col-md-6 col-lg-12">
+        <div class="col-6 col-lg-12">
           <div class="card form-group">
             <div class="card-header text-center">
               Stamina
@@ -145,7 +137,7 @@
             </table>
           </div>
         </div>
-        <div class="col-md-6 col-lg-12">
+        <div class="col-6 col-lg-12">
           <div class="card form-group">
             <div class="card-header text-center">
               Defense
@@ -174,7 +166,7 @@
             </table>
           </div>
         </div>
-        <div class="col-md-6 col-lg-12">
+        <div class="col-6 col-lg-12">
           <div class="card form-group">
             <div class="card-header text-center">
               Fortitude

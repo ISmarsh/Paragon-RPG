@@ -1,10 +1,11 @@
 import { Data } from "../core/types";
 import { Index } from '../core/classes';
+import { StatName } from './stat';
 
 export type Archetype = Data & {
   description: string;
   inherentAbility: string;
-  statIncreases: {[stat: string]: number};
+  statIncreases: { [stat in StatName]?: 1 | 2 };
   primaryPower: string;
   secondaryPower: string;
   recoveryDice: string;

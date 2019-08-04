@@ -4,10 +4,16 @@ import { StatName } from './stat';
 
 export type AncillaryPower = Data & {
   description: string;
-  enhancement?: StatName;
+  statIncrease?: { [stat in StatName]?: number } | { "Choose": (1 | 2)[] };
+  skillProficiency?: StatName;
 }
 
 export const AncillaryPowers = new Index<AncillaryPower>(
+  {
+    "name": "Stat Increase",
+    "description": "Choose one stat to increase by 2, and another to increase by 1. Neither can exceed 30.",
+    statIncrease: { "Choose": [2, 1] }
+  },
   {
     "name": "Danger Sense",
     "description": "You can use your reaction to force an attack roll against you that hits to be rerolled and they must take the new result."
@@ -23,32 +29,50 @@ export const AncillaryPowers = new Index<AncillaryPower>(
   {
     "name": "Enhanced Durability",
     "description": "With a minor increase in your durability you gain +1 Vitality and gain proficiency in one Vitality based skill of your choice that you aren’t already proficient in.",
-    "enhancement": "Vitality"
+    "statIncrease": {
+      "Vitality": 1
+    },
+    "skillProficiency": "Vitality"
   },
   {
     "name": "Enhanced Intuition",
     "description": "With a minor increase in your intuition you gain +1 Ego and gain proficiency in one Ego based skill of your choice that you aren’t already proficient in.",
-    "enhancement": "Ego"
+    "statIncrease": {
+      "Ego": 1
+    },
+    "skillProficiency": "Ego"
   },
   {
     "name": "Enhanced Reflexes",
     "description": "With a minor increase in your reflexes you gain +1 Swiftness and gain proficiency in one Swiftness based skill of your choice that you aren’t already proficient in.",
-    "enhancement": "Swiftness"
+    "statIncrease": {
+      "Swiftness": 1
+    },
+    "skillProficiency": "Swiftness"
   },
   {
     "name": "Enhanced Smarts",
     "description": "With a minor increase in your brain power you gain +1 Intelligence and gain proficiency in one Intelligence based skill of your choice that you aren’t already proficient in.",
-    "enhancement": "Intelligence"
+    "statIncrease": {
+      "Intelligence": 1
+    },
+    "skillProficiency": "Intelligence"
   },
   {
     "name": "Enhanced Speech",
     "description": "With a minor increase in your social skills you gain +1 Charisma and gain proficiency in one Charisma based skill of your choice that you aren’t already proficient in.",
-    "enhancement": "Charisma"
+    "statIncrease": {
+      "Charisma": 1
+    },
+    "skillProficiency": "Charisma"
   },
   {
     "name": "Enhanced Strength",
     "description": "With a minor increase in your strength you gain +1 Might and gain proficiency in one Might based skill of your choice that you aren’t already proficient in.",
-    "enhancement": "Might"
+    "statIncrease": {
+      "Might": 1
+    },
+    "skillProficiency": "Might"
   },
   {
     "name": "Fauna Speech",
@@ -93,5 +117,5 @@ export const AncillaryPowers = new Index<AncillaryPower>(
   {
     "name": "X-Ray Vision",
     "description": "You can see through up to 6 inches of solid matter within 60 feet of your location."
-  },    
+  },
 );

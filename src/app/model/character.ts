@@ -1,10 +1,10 @@
 import { Origin, Origins } from 'src/app/data/origin';
 import { Archetype, Archetypes } from 'src/app/data/archetype';
 import { TraversalPower, TraversalPowers } from 'src/app/data/traversal';
-import { Stats } from '../data/stat';
+import { Stats, StatName } from '../data/stat';
 import { Entity } from './entity';
 import { Alignment, Alignments } from '../data/alignment';
-import { jsonObject, jsonMember } from 'typedjson';
+import { jsonObject, jsonMember, jsonArrayMember } from 'typedjson';
 import { jsonDataMember, jsonDataArrayMember } from '../core/decorators/json-data-member';
 import { Language, Languages } from '../data/language';
 import { group } from '../core/functions';
@@ -19,12 +19,6 @@ import { TitleCasePipe } from '@angular/common';
 @jsonObject
 @Reflect.metadata("name", "Character")
 export class Character extends Entity {
-  constructor() {
-    super();
-
-    Stats.forEach(s => this.stats[s.name] = 10);
-  }
-
   @jsonMember name?: string;
 
   @jsonMember({ name: "level" })
@@ -32,11 +26,14 @@ export class Character extends Entity {
   get level(): number { return this._level; }
   set level(value: number) {
     this._level = Math.min(Math.max(1, value), 30);
-    
+
     var ancillaryCount = (this.levelFeatures[Features.Ancillary] || []).length;
-    this.ancillaryPowers = this.ancillaryPowers.splice(ancillaryCount);
+    this.ancillaryPowers = this.ancillaryPowers.concat(
+      new Array<AncillaryPower>(ancillaryCount)
+    );
+    this.ancillaryPowers.splice(ancillaryCount);
   }
-  get proficiency(): number { return 2 + Math.floor((this.level - 1) / 4); }  
+  get proficiency(): number { return 2 + Math.floor((this.level - 1) / 4); }
   get levelFeatures(): Level {
     return Progression.slice(0, this.level).reduce((a, b) => {
       for (let key in b) {
@@ -55,29 +52,28 @@ export class Character extends Entity {
 
     this.languages = new Array<Language>(this.origin.languages.length);
 
-    for (const skill in this.skills) {
-      if (this.origin.proficiencyOptions.indexOf(skill) === -1) {
-        this.skills[skill] = false;
-      }
+    this.originSkills = this.originSkills.filter(s => this.origin.proficiencyOptions.indexOf(s) > -1);
+  }
+
+  @jsonArrayMember(String) originSkills: string[] = [];
+  public changeOriginSkill(from: string, to: string): void {
+    let index = this.originSkills.indexOf(from);
+
+    if (index > -1) {
+      this.originSkills[index] = to;
+    }
+    else if (to && to.length) {
+      this.originSkills.push(to);
     }
   }
-  public originSkills(): string[] {
-    const array = new Array<string>(this.origin.proficiencyCount);
+  public getOriginSkills(): string[] {
+    const array = this.originSkills.concat(new Array<string>(this.origin.proficiencyCount));
 
-    for (let i = 0; i < array.length; i++) {
-      for (let j = 0; j < this.origin.proficiencyOptions.length; j++) {
-        const skill = this.origin.proficiencyOptions[j];
-
-        if (this.skills[skill] && array.indexOf(skill) === -1) {
-          array[i] = skill;
-
-          break;
-        }
-      }
-    }
+    array.splice(this.origin.proficiencyCount);
 
     return array;
   }
+
   public originLanguageDisplay(): string {
     var display = "English";
 
@@ -125,6 +121,28 @@ export class Character extends Entity {
     return array.join(", ");
   }
 
+  @jsonDataArrayMember(AncillaryPowers)
+  ancillaryPowers: AncillaryPower[] = [];
+  @jsonMember
+  ancillaryStats: { [index: number]: { [increase: number]: StatName } } = {};
+  public setIncrease(index: number, increase: number, stat: StatName) {
+    if (!this.ancillaryStats[index]) {
+      this.ancillaryStats[index] = {};
+    }
+
+    this.ancillaryStats[index][increase] = stat;
+  }
+  @jsonMember({ name: "ancillarySkills" })
+  _ancillarySkills: { [index: number]: string };
+  get ancillarySkills() {
+    if (!this._ancillarySkills) {
+      this._ancillarySkills = {};
+    }
+
+    return this._ancillarySkills;
+  }
+
+
   @jsonDataMember(PowerSets)
   primaryPowerSet?: PowerSet;
   public primaryPowers(): MainPower[] {
@@ -133,8 +151,8 @@ export class Character extends Entity {
     var primarySet = MainPowers.byCategory[this.primaryPowerSet.name];
 
     return this.levelFeatures[Features.PrimaryPower].map((i: number) => primarySet[i - 1]);
-  }  
-  
+  }
+
   @jsonDataMember(PowerSets)
   secondaryPowerSet?: PowerSet;
   public secondaryPowers(): MainPower[] {
@@ -163,9 +181,6 @@ export class Character extends Entity {
     return `${scale.die[0]}d${scale.die[1]} ${power.damage.type}`;
   }
 
-  @jsonDataArrayMember(AncillaryPowers)
-  ancillaryPowers: AncillaryPower[] = [];
-
   @jsonDataMember(TraversalPowers)
   traversal?: TraversalPower;
 
@@ -174,35 +189,60 @@ export class Character extends Entity {
   @jsonDataMember(DamageTypes)
   presence?: DamageType;
 
-  @jsonMember stats: { [stat: string]: number } = {};
-  getStat(stat: string): number {
+  @jsonMember stats: { [stat in StatName]: number } = {
+    "Might": 14, "Swiftness": 14, "Vitality": 14,
+    "Intelligence": 14, "Ego": 14, "Charisma": 14,
+  };
+  getStat(stat: StatName): number {
     return this.stats[stat] + this.getStatIncrease(stat);
   }
-  getStatIncrease(stat: string): number {
+  getStatIncrease(stat: StatName): number {
     if (!this.archetype) return 0;
 
-    return (this.archetype.statIncreases[stat] || 0)
+    var statIncrease = 0;
+    for (let i = 0; i < this.ancillaryPowers.length; i++) {
+      const ancillary = this.ancillaryPowers[i];
+
+      if (ancillary.statIncrease["Choose"]) {
+        ancillary.statIncrease["Choose"].forEach(increase => {
+          if ((this.ancillaryStats[i] || {})[increase] === stat) {
+            statIncrease += increase;
+          }
+        });
+      } else {
+        statIncrease += (ancillary.statIncrease || {})[stat] || 0;
+      }
+    }
+
+    return statIncrease
+      + (this.archetype.statIncreases[stat] || 0)
       + (this.archetype.statIncreases["All Stats"] || 0);
   }
-
-  @jsonMember skills: { [skill: string]: boolean } = {};
-  changeSkill(from: string, to: string): void {
-    this.skills[from] = false;
-    this.skills[to] = true;
-  }
-  getMod(stat: string, skill?: string): number {
+  getMod(stat: StatName, skill?: string): number {
     let mod = Math.round((this.getStat(stat) - 11) / 2);
 
-    if (skill && this.skills[skill]) { mod += this.proficiency; }
+    if (skill && this.skills.indexOf(skill) > -1) {
+      mod += this.proficiency;
+    }
 
     return mod;
   }
-  canBeProficient(skill: string): boolean {
-    if (this.skills[skill]) return true;
+  get skills(): string[] {
+    var skills = [];
 
-    return this.origin &&
-      this.origin.proficiencyOptions.indexOf(skill) > -1 &&
-      this.origin.proficiencyOptions.filter(s => this.skills[s]).length < this.origin.proficiencyCount;
+    for (let skill of this.originSkills) {
+      skills.push(skill);
+    }
+
+    for (let i = 0; i < this.ancillaryPowers.length; i++) {
+      const power = this.ancillaryPowers[i];
+
+      if (power && power.skillProficiency && this.ancillarySkills[i]) {
+        skills = skills.concat(this.ancillarySkills[i]);
+      }
+    }
+
+    return skills;
   }
 
   @jsonMember health: number;
