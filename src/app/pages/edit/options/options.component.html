@@ -222,8 +222,8 @@
                   <li class="list-group-item">
                     <b>Activation: </b>{{power.activation}}, {{power.stamina}} Stamina
                   </li>
-                  <li class="list-group-item" *ngIf="power.damage">
-                    <b>Damage: </b>{{character.damageDisplay(power)}}
+                  <li class="list-group-item" *ngIf="power.effectRoll">
+                    <b>Effect Roll: </b>{{character.effectRollDisplay(power)}}
                   </li>
                   <li class="list-group-item">
                     {{power.description}}

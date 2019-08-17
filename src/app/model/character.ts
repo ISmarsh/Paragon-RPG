@@ -175,10 +175,16 @@ export class Character extends Entity {
     return display;
   }
 
-  damageDisplay(power: MainPower): string {
-    var scale = (power.damage.scale.concat([])).reverse().find(s => s.level <= this.level)
+  effectRollDisplay(power: MainPower): string {
+    var scale = (power.effectRoll.scale.concat([])).reverse().find(s => s.level <= this.level)
 
-    return `${scale.die[0]}d${scale.die[1]} ${power.damage.type}`;
+    var display = `${scale.die[0]}d${scale.die[1]}`;
+
+    if (power.effectRoll.type) {
+      display += ` ${power.effectRoll.type}`;
+    }
+
+    return display;
   }
 
   @jsonDataMember(TraversalPowers)

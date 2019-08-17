@@ -8,7 +8,7 @@ export type MainPower = Data & {
   range: 'Self' | 'Melee' | number;
   description: string;
   area?: { size: number, type: string }
-  damage?: { scale: {level: number, die: Die}[], type: string }
+  effectRoll?: { scale: {level: number, die: Die}[], type: string }
   minion?: Minion;
 }
 
@@ -37,7 +37,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 60,
       "description": "You immobilize a single for in a ring of flames. Make a ranged attack roll against a single foe. On hit, they take 1d12 fire damage and are Immobilized. This damage increases to 2d12 at Level 5, 3d12 at Level 10, 4d12 at Level 15, and 5d12 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -75,7 +75,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "fire"
+        "type": "Fire"
       }
     },
     {
@@ -84,7 +84,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 30,
       "description": "You incapacitate a distant foe, choking them with smoldering soot and ash. Make a ranged attack roll against a single foe. On hit they take 1d8 and are Held. This damage increases to 2d8 at Level 5, 3d8 at Level 10, 4d8 at Level 15, and 5d8 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -122,7 +122,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "and"
+        "type": ""
       }
     },
     {
@@ -146,7 +146,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 15,
         "type": "Cone"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -177,7 +177,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "fire"
+        "type": "Fire"
       }
     },
     {
@@ -190,7 +190,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 30,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -200,7 +200,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "fire"
+        "type": "Fire"
       }
     },
     {
@@ -213,7 +213,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 20,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -223,7 +223,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "fire"
+        "type": "Fire"
       }
     },
     {
@@ -236,7 +236,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 30,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -246,7 +246,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "fire"
+        "type": "Fire"
       }
     },
     {
@@ -266,7 +266,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 3,
       "range": 60,
       "description": "You bring forth a brilliant flash that severely hurts a target and disorients them. Make a ranged attack roll against a single foe. On hit, they take 3d12 fire damage and are Disoriented.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -276,7 +276,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "fire"
+        "type": "Fire"
       }
     },
     {
@@ -312,7 +312,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 60,
       "description": "You immobilize a single target in a twisted mass of thorny roots. Make a ranged attack roll against a single target. On hit, they take 1d8 Physical damage and must succeed on a Swiftness saving throw or become Immobilized. This damage increases to 2d8 at Level 5, 3d8 at Level 10, 4d8 at Level 15, and 5d8 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -366,7 +366,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": "Self",
       "description": "You instinctually burst forth barbed roots after taking a melee attack. As a reaction, when you are hit by a melee attack the foe that attacked you takes 1d6 Physical damage. This damage increases to 2d6 at Level 10, 3d6 at Level 15, and 4d6 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -410,7 +410,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 15,
         "type": "Cone"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -454,7 +454,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 10,
         "type": "area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -495,7 +495,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 30,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -505,7 +505,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "hit"
+        "type": "Hit Points"
       }
     },
     {
@@ -518,7 +518,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 30,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -566,7 +566,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 5,
       "description": "You wrap your fists with energy from the Netherworld and perform a single punch. Make a melee attack against a single foe. On hit, they take 1d10 Darkness damage. This damage increases to 2d10 at Level 5, 3d10 at Level 10, 4d10 at Level 15, and 5d10 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -613,7 +613,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 5,
       "description": "You wrap your entire arms in energy from the Netherworld and perform a quick series of blows. Make a melee attack against a single foe. On hit, they take 2d6 Darkness damage. This damage increases to 3d6 at Level 5, 4d6 at Level 10, 5d6 at Level 15, and 6d6 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -667,7 +667,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 5,
       "description": "You tap into the Netherworld’s horrible visage and give a single foe a glimpse into it. Make a melee attack against a single foe. On hit, they take 1d8 Darkness damage and are Feared until the start of your next turn. This damage increases to 2d8 at Level 10, 3d8 at Level 15, and 4d8 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -711,7 +711,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 15,
         "type": "Cone"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -751,7 +751,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 5,
       "description": "You tap into the powers of the Netherworld to create a conduit between a foe and yourself. Make a melee attack against a single foe. On hit, they take 2d8 Darkness damage and you regain hit points equal to the damage dealt. This damage increases to 4d8 at Level 15 and 6d8 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -784,7 +784,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 5,
       "description": "You overcharge your fists with energy from the Netherworld bringing down a powerful strike on a foe. Make a melee attack against a single foe. On hit, they take 3d10 Darkness damage and giving them -2 to Accuracy rolls on their next turn.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -803,7 +803,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 3,
       "range": 10,
       "description": "You draw forth the life force from all those around you with your energy. As a reaction when hit with an attack, everyone within range must succeed on a Might saving throw. On failure, they take 3d10 Darkness damage and are pulled 5 feet into melee range. On success, they take half damage and aren’t moved.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -822,7 +822,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 3,
       "range": 10,
       "description": "You sap the energy from those around you to fuel your own powers. Make a melee attack against all foes in range. On hit, they take 2d10 Darkness damage and you regain 1 Stamina. On a critical hit, you regain 3 Stamina.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -841,7 +841,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 5,
       "range": 5,
       "description": "You surround your body in energy from the Netherworld and grapple your foe into darkness. Make a melee attack against a single foe. On hit, they take 5d10 Darkness damage and are grappled. While they remain in your grapple, each turn they take 1d10 Darkness damage.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -862,7 +862,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 5,
       "description": "You perform a strong front kick on a single foe. Make a melee attack against a single foe. On hit, they take 1d8 Physical damage. This damage increases to 2d8 at Level 5, 3d8 at Level 10, 4d8 at Level 15, and 5d8 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -909,7 +909,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 5,
       "description": "You perform a spinning back kick to the head of a single foe. Make a melee attack against a single foe. On hit, they take 1d12 Physical damage. This damage increases to 2d12 at Level 10, 3d12 at Level 15, and 4d12 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -956,7 +956,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 5,
       "description": "You strike at a foe with a quick precision palm strike. Make a melee attack against a single foe. On hit, they take 1d10 Physical damage and are Disoriented until the end of their next turn.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -982,7 +982,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 5,
       "description": "You perform a calculated side kick to a single foe. Make a melee attack against a single foe. On hit, they take 2d10 Physical damage and must succeed on a Might saving throw or be pushed back 10 feet. This damage increases to 3d10 at Level 15 and 4d10 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1015,7 +1015,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 5,
       "description": "You assault the foe with a hand strike from both sides at once. Make a melee attack against a single foe. On hit, they take 2d6 Physical damage. On a critical hit, they are also Disoriented until the end of their next turn. This damage increases to 4d6 at Level 15 and 6d6 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1048,7 +1048,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 3,
       "range": 5,
       "description": "You bring down a high stance kick with brutal force to the back of their neck. Make a melee attack against a single foe. On hit, they take 3d8 Physical damage. Because of the nature of this strike your Critical Hit range increases to 18-20 instead of just 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1067,7 +1067,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 3,
       "range": 5,
       "description": "You make a spinning sweep attack with both legs hitting all foes around you. Make a melee attack against all foes within range. On hit, they take 2d10 Physical damage and are knocked prone.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1086,7 +1086,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 5,
       "range": 5,
       "description": "You perform a devastating nerve strike with your palm that disorients your foe. Make a melee attack against a single foe. On hit, they take 4d12 Physical damage and are Disoriented until the end of their next turn.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1107,7 +1107,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 30,
       "description": "You fire a quick single blast from your pulse rifle. Make a ranged attack against a single foe. On hit, they take 1d8 Energy damage. This damage increases to 2d8 at Level 5, 3d8 at Level 10, 4d8 at Level 15, and 5d8 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1180,7 +1180,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 30,
       "description": "You fire a quick rapid fire burst from your pulse rifle. Make a ranged attack against a single foe. On hit, they take 2d4 Energy damage. This damage increases to 3d4 at Level 5, 4d4 at Level 10, 5d4 at Level 15, and 6d4 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1227,7 +1227,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 30,
       "description": "After taking critical damage your robot attempts to some manual self repairs. As a reaction, when hit with an attack you can have one of your minions perform simple maintenance. They regain 2d6 hit points and gain +2 damage to their next attack.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1237,7 +1237,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "hit"
+        "type": "Hit Points"
       }
     },
     {
@@ -1250,7 +1250,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 10,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1307,7 +1307,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 15,
         "type": "Cone"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1362,7 +1362,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 30,
       "description": "You shoot forth a single shot from your web shooter. Make a ranged attack against a single foe. On hit, they take 1d6 Force damage. This damage increases to 2d6 at Level 5, 3d6 at Level 10, 4d6 at Level 15, and 5d6 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1409,7 +1409,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 30,
       "description": "You shoot a concentrated shot with high velocity from your web shooter. Make a ranged attack against a single foe. On hit, they take 1d10 Force damage and must succeed on a Might saving throw or be knocked back 10 feet. This damage increases to 2d10 at Level 10, 3d10 at Level 15, and 4d10 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1449,7 +1449,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 30,
       "description": "You overcharge a burst from your web shooter with an electrical charge. Make a ranged attack against a single foe. On hit, they take 1d6 Force damage and 1d8 Lightning damage. This Lightning damage increases to 2d8 at Level 10, 3d8 at Level 15, and 4d8 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1489,7 +1489,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 30,
       "description": "You grab onto two targets and pull them into each other with your web shooter. Make a ranged attack against two targets within 30 feet of each other. On hit, you pull them to a central point between them and they take 2d10 Force damage. On a critical hit, they are both knocked prone as well.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1515,7 +1515,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 30,
       "description": "You spin a single foe into a ball of web and use him to attack foes. Make a ranged attack roll against a single target. On hit, they take 2d10 Force damage and are grappled. While grappled in this manor, you can use them on future turns as a weapon to hit foes. On hit, this grappled enemy deals 2d10 Force damage and themselves take half the damage done.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1534,7 +1534,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 120,
       "description": "You hone in for a precision shot from your web shooter from insane range. Make a ranged attack against a single foe. On hit, they take 4d8 Force damage.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1557,7 +1557,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 15,
         "type": "Cone"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1580,7 +1580,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 30,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1603,7 +1603,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 10,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1623,14 +1623,94 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "activation": "Act",
       "stamina": 1,
       "range": 60,
-      "description": "You encase a single ally inside a deflective shield for 1 minute. For the duration they gain +2 Defense and when attacks manage to get through are reduced by 1d4 damage. This reduction of damage increases as you level up. 1d6 at Level 5, 1d8 at Level 10, 1d10 at Level 15, 1d20 at Level 20."
+      "description": "You encase a single ally inside a deflective shield for 1 minute. For the duration they gain +2 Defense and when attacks manage to get through are reduced by 1d4 damage. This reduction of damage increases as you level up. 1d6 at Level 5, 1d8 at Level 10, 1d10 at Level 15, 1d20 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              4
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              1,
+              6
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              1,
+              8
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              1,
+              10
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              1,
+              20
+            ]
+          }
+        ],
+        "type": ""
+      }
     },
     {
       "name": "Insulation Shield",
       "activation": "Act",
       "stamina": 1,
       "range": 60,
-      "description": "You encase a single ally inside an insulating shield for 1 minute. For the duration they gain +2 Fortitude and when attacks manage to get through are reduced by 1d4 damage. This reduction of damage increases as you level up. 1d6 at Level 5, 1d8 at Level 10, 1d10 at Level 15, 1d20 at Level 20."
+      "description": "You encase a single ally inside an insulating shield for 1 minute. For the duration they gain +2 Fortitude and when attacks manage to get through are reduced by 1d4 damage. This reduction of damage increases as you level up. 1d6 at Level 5, 1d8 at Level 10, 1d10 at Level 15, 1d20 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              4
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              1,
+              6
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              1,
+              8
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              1,
+              10
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              1,
+              20
+            ]
+          }
+        ],
+        "type": ""
+      }
     },
     {
       "name": "Personal Force Field",
@@ -1645,7 +1725,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 30,
       "description": "You discharge a bolt of force in the form of a bubble that knocks foes back and deals a bit of damage. Make a ranged attack roll against a single target. On hit, they take 1d8 force damage and must succeed on a Might check or be knocked back 20 feet. This damage increases to 2d8 at Level 10, 3d8 at Level 15, and 4d8 at Level 20.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1676,7 +1756,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "force"
+        "type": "Force"
       }
     },
     {
@@ -1720,7 +1800,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 5,
       "range": 30,
       "description": "You encase a single foe inside a crushing bubble that slowly shrinks in on them. Make a ranged attack roll against a single target. On hit, they are considered Held and take 2d10 force damage. Until they break free, they take an additional 2d10 force damage at the start of each of their turns.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1730,7 +1810,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "force"
+        "type": "Force"
       }
     }
   ],
@@ -1745,7 +1825,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 10,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1792,7 +1872,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 1,
       "range": 30,
       "description": "You use your kinetic force to repel a single enemy coming towards you. As a reaction, when any enemy moves you can make a ranged attack against them. On hit, they take 1d8 Force damage and are knocked back 20 feet.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1810,7 +1890,19 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "activation": "Act",
       "stamina": 1,
       "range": 30,
-      "description": "You pull forth power from an enemy draining him and empowering you. Choose a single foe within range and they must succeed on an Ego saving throw. On failure, they gain a -1d4 Debuff to their damage rolls until the end of their next turn, while you gain an additional 1d4 damage on your next attack. This ability can stack until used, up to 6d4 damage."
+      "description": "You pull forth power from an enemy draining him and empowering you. Choose a single foe within range and they must succeed on an Ego saving throw. On failure, they gain a -1d4 Debuff to their damage rolls until the end of their next turn, while you gain an additional 1d4 damage on your next attack. This ability can stack until used, up to 6d4 damage.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              4
+            ]
+          }
+        ],
+        "type": ""
+      }
     },
     {
       "name": "Siphon Speed",
@@ -1861,7 +1953,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 30,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -1871,7 +1963,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": ""
+        "type": "Stamina"
       }
     },
     {
@@ -1914,7 +2006,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 2,
       "range": 60,
       "description": "You enlarge an object to an enormous size. Choose an object of size Tiny. That object is now enlarged up to Medium, Large, or Huge. You can use this in combination with throwing the object in order to smash it into foes. If you choose to do this make a ranged attack roll against a single foe. On hit, they take damage equal to the size you enlarge it to. A medium object hits for 1d10 Physical damage, a Large object hits for 2d10 Physical damage, and a Huge object hits for 3d10 Physical damage. You can only enlarge one object at a time.",
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -2002,7 +2094,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 5,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -2032,7 +2124,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 10,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -2098,7 +2190,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "size": 30,
         "type": "Area"
       },
-      "damage": {
+      "effectRoll": {
         "scale": [
           {
             "level": 1,
@@ -2111,7 +2203,998 @@ export const MainPowers = new CategoryIndex<MainPower>({
         "type": "Darkness"
       }
     }
+  ],
+  "Darkness Control": [
+    {
+      "name": "Shadowy Binds",
+      "activation": "Act",
+      "stamina": 1,
+      "range": 60,
+      "description": "You take control of your victim’s shadow causing it to entangle them in place and take a small amount of damage. Make a ranged attack against a single target. On hit, they take 1d6 Darkness damage and must succeed on a Swiftness saving throw or become Immobilized. This damage increases to 2d6 at Level 5, 3d6 at Level 10, 4d6 at Level 15, and 5d6 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              6
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              2,
+              6
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              3,
+              6
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              4,
+              6
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              5,
+              6
+            ]
+          }
+        ],
+        "type": "Darkness"
+      }
+    },
+    {
+      "name": "Dark Grasp",
+      "activation": "Act",
+      "stamina": 1,
+      "range": 60,
+      "description": "You take control of your victim’s shadow to wholly envelop them, leaving them held and helpless. Choose a single foe within range and they must succeed on a Swiftness saving throw or become Held. On success, they are immune to Hold for this combat."
+    },
+    {
+      "name": "Negative Strike",
+      "activation": "Act",
+      "stamina": 1,
+      "range": 5,
+      "description": "You pull forth a part of your own shadow to swipe at the foe with an arc of darkness. Make a melee attack against a single target. On hit, they take 1d10 Darkness damage. This damage increases to 2d10 at Level 10, 3d10 at Level 15, and 4d10 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              10
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              2,
+              10
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              3,
+              10
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              4,
+              10
+            ]
+          }
+        ],
+        "type": "Darkness"
+      }
+    },
+    {
+      "name": "Possess",
+      "activation": "Act",
+      "stamina": 2,
+      "range": 30,
+      "description": "You cause your foe to be possessed by a dark entity from the Netherworld. Target a single foe and they must make an Ego saving throw or become Confused."
+    },
+    {
+      "name": "Living Shadows",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You extend and animate your own shadow causing it to entangle all foes within range. All foes in range must make a Swiftness saving throw or become Immobilized.",
+      "area": {
+        "size": 20,
+        "type": "Cone"
+      }
+    },
+    {
+      "name": "Fearsome Stare",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You instill tremendous fear to all those in front of you. All foes in range must succeed on an Ego saving throw or become Feared. Additionally, at the beginning of every turn they are Feared including when the power is used they take 1d8 Darkness damage. This damage increases to 2d8 at Level 15 and 3d8 at Level 20.",
+      "area": {
+        "size": 20,
+        "type": "Cone"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              8
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              2,
+              8
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              3,
+              8
+            ]
+          }
+        ],
+        "type": "Darkness"
+      }
+    },
+    {
+      "name": "Heart of Darkness",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "In a burst of negative energy you overwhelm the minds of those around you causing them to be stunned and suffer damage. Each foe within 30 feet of you must succeed on a Vitality saving throw or become Disoriented. Additionally, they take 3d10 Darkness damage. They take half damage on a successful save and are not Disoriented.",
+      "area": {
+        "size": 30,
+        "type": "Area"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              3,
+              10
+            ]
+          }
+        ],
+        "type": "Darkness"
+      }
+    },
+    {
+      "name": "Haunt",
+      "activation": "Act",
+      "stamina": 3,
+      "range": 60,
+      "description": "You summon a terrible Shade from the Netherworld to harass your foe. Target a single foe and you summon a Shadow within 5 feet of their location in any unoccupied spot. For 1 minute, this Shade is under your command. He uses your Initiative number. He can move up to 20 feet in any direction on a turn, using flight. He can make a melee attack using your Ego Modifier as bonus for to hit and damage rolls that deals 3d6 Darkness damage on a hit. If this Shade defeats a foe, you regain 10 Health.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              3,
+              6
+            ]
+          }
+        ],
+        "type": "Darkness"
+      }
+    },
+    {
+      "name": "Shadow Field",
+      "activation": "Act",
+      "stamina": 3,
+      "range": 60,
+      "description": "You blanket a huge area in darkness. Any foe who enters this area will have a chance to be held and take damage. Choose an area within range, and every foe in a 30ft circle from that location must make a Swiftness saving throw or take 2d10 Darkness damage and become Held. This field stands for the next 1 minute and any foe entering for the first time or ending a turn inside this makes this saving throw. On success, they are immune to this Shadow Field.",
+      "area": {
+        "size": 30,
+        "type": "Area"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              2,
+              10
+            ]
+          }
+        ],
+        "type": "Darkness"
+      }
+    },
+    {
+      "name": "Umbra Beast",
+      "activation": "Act",
+      "stamina": 5,
+      "range": "Self",
+      "description": "You conjure up one of the most fearsome creatures of the Netherworld. This creature will fight beside you using bite and darkness attacks. The Umbra Beast’s stat block is below. It acts on your Initiative and gets one Movement and Action a turn. It remains until you dismiss it, resummons it, or it dies."
+    }
+  ],
+  "Electric Control": [
+    {
+      "name": "Electric Fence",
+      "activation": "Act",
+      "stamina": 1,
+      "range": 30,
+      "description": "You surround and immobilize a single target in an electric field. Make a ranged attack against a single target. On hit, they take 1d8 Lightning damage and make a Swiftness saving throw or become Immobilized. The damage increases to 2d8 at Level 5, 3d8 at Level 10, 4d8 at Level 15, and 5d8 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              8
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              2,
+              8
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              3,
+              8
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              4,
+              8
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              5,
+              8
+            ]
+          }
+        ],
+        "type": "Lightning"
+      }
+    },
+    {
+      "name": "Tesla Cage",
+      "activation": "Act",
+      "stamina": 1,
+      "range": 60,
+      "description": "You incase a single foe in an electric cage preventing them from acting. Make a ranged attack against a single target. On hit, they are Held."
+    },
+    {
+      "name": "Jolting Chain",
+      "activation": "Act",
+      "stamina": 1,
+      "range": 30,
+      "description": "You hit a single target with a bolt of lightning that then has a chance to chain to those around him. Make a ranged attack against a single target. On hit, they take 2d8 Lightning damage and each foe within 10 feet of the target must make a  Swiftness saving throw or take 1d8 Lightning damage.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              2,
+              8
+            ]
+          }
+        ],
+        "type": "Lightning"
+      }
+    },
+    {
+      "name": "Chain Fences",
+      "activation": "Act",
+      "stamina": 2,
+      "range": 30,
+      "description": "You hit a single target with an immobilizing attack that then has a chance to chain this immobilization around him. Make a ranged attack against a single target. On hit, they take 1d8 Lightning damage and are Immobilized and each foe within 10 feet of the target must make a Swiftness saving throw or be Immobilized.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              8
+            ]
+          }
+        ],
+        "type": "Lightning"
+      }
+    },
+    {
+      "name": "Conductive Aura",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "If you activate this power, the air around you becomes charged with electricity, leaping out and shocking foes that get too close. As an Act, toggle this power. Each foe that ends their turn within 5ft of you must make a Swiftness saving throw or take 1d6 Lightning damage and you recover 1d4 Stamina Point. The damage increases to 2d6 at Level 15 and 3d6 at Level 20. The recovery increases to 2d4 at Level 15 and 3d4 at Level 20. A toggled power remains active until you toggle it off as a free action, or you are held/slept/disoriented where it immediately drops.",
+      "area": {
+        "size": 5,
+        "type": "Area"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              6
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              2,
+              6
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              3,
+              6
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              2,
+              4
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              3,
+              4
+            ]
+          }
+        ],
+        "type": "Lightning"
+      }
+    },
+    {
+      "name": "Disorienting Zap",
+      "activation": "Act",
+      "stamina": 2,
+      "range": 60,
+      "description": "You shoot out a thin bolt of lightning in an attempt to disorient a single foe. Make a ranged attack against a single target. On hit, they take 2d10 Lightning damage and are Disoriented until the start of their next turn. This damage increases to 3d10 at Level 15 and 4d10 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              2,
+              10
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              3,
+              10
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              4,
+              10
+            ]
+          }
+        ],
+        "type": "Lightning"
+      }
+    },
+    {
+      "name": "Static Field",
+      "activation": "Act",
+      "stamina": 2,
+      "range": 60,
+      "description": "You create a large field of electricity in a point ensnaring all foes within. Choose a spot within range and all foes within 20 feet of that point must make Swiftness saving throw or they become Immobilized.",
+      "area": {
+        "size": 20,
+        "type": "Area"
+      }
+    },
+    {
+      "name": "Paralyzing Blast",
+      "activation": "Act",
+      "stamina": 3,
+      "range": 60,
+      "description": "You create a massive shockwave blast centered on a location. Choose a spot within range and all foes within 20 feet of that point must make a Swiftness saving throw or take 4d8 Lightning damage and become Held. On success, they take half damage and are not Held.",
+      "area": {
+        "size": 20,
+        "type": "Area"
+      },
+      "effectRoll": {
+
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              4,
+              8
+            ]
+          }
+        ],
+        "type": "Lightning"
+      }
+    },
+    {
+      "name": "Synaptic Overload",
+      "activation": "Act",
+      "stamina": 3,
+      "range": 30,
+      "description": "You try to overload the brain of a single foe and attempt to chain this focus to others around him. Make a ranged attack against a single foe. On hit, they take 2d10 Lightning damage and become Confused. All foes within 10 feet of this target must succeed on an Ego saving throw or also become Confused.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              2,
+              10
+            ]
+          }
+        ],
+        "type": "Lightning"
+      }
+    },
+    {
+      "name": "Gremlins",
+      "activation": "Act",
+      "stamina": 5,
+      "range": "Self",
+      "description": "You form two beings of pure lightning energy into humanoid forms. These creatures will fight beside you using shock and lightning attacks. The Electric Gremlin stat block is below. They act on your Initiative and get one Movement and Action a turn. They remain until you dismiss them, resummons them, or they die.",
+      "minion": {
+        "name": "Electric Gremlin",
+        "health": 45,
+        "speed": 30,
+        "defense": 14,
+        "fortitude": 12,
+        "might": 18,
+        "swiftness": 13,
+        "vitality": 18,
+        "intelligence": 8,
+        "ego": 10,
+        "charisma": 6,
+        "weaknesses": "Force",
+        "presences": "Lightning",
+        "acts": [
+          "Electric Shock (Melee, +7 to Hit, 2d8 Lightning damage)",
+          "Tesla Cage (Range, +4 to Hit, Foe is Held)"
+        ]
+      }
+    }
+  ],
+  "Energy Melee": [
+    {
+      "name": "Barrage",
+      "activation": "Act",
+      "stamina": 1,
+      "range": 5,
+      "description": "You coat your fists in a flurry of energy and deliver two quick blows. Make a melee attack against a single target. On hit, they take 2d4 Energy damage. This damage increases to 3d4 at Level 5, 4d4 at Level 10, 5d4 at Level 15, and 6d4 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              2,
+              4
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              3,
+              4
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              4,
+              4
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              5,
+              4
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              6,
+              4
+            ]
+          }
+        ],
+        "type": "Energy"
+      }
+    },
+    {
+      "name": "Energy Punch",
+      "activation": "Act",
+      "stamina": 1,
+      "range": 5,
+      "description": "You deliver a single haymaker punch with an energy burst. Make a melee attack against a single target. On hit, they take 1d6 Energy damage and they must succeed on a Vitality saving throw or become Disoriented until the end of their next turn. This damage increases to 2d6 at Level 5, 3d6 at Level 10, 4d6 at Level 15, and 5d6 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              6
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              2,
+              6
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              3,
+              6
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              4,
+              6
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              5,
+              6
+            ]
+          }
+        ],
+        "type": "Energy"
+      }
+    },
+    {
+      "name": "Build Up",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You tap into your energy to empower your next attack. The next melee attack you perform is done with advantage and deals an additional amount of Energy damage equal to your level. This effect cannot stack."
+    },
+    {
+      "name": "Bone Smasher",
+      "activation": "Act",
+      "stamina": 2,
+      "range": 5,
+      "description": "You fists teem with energy and you deliver a smashing double axe handle blow. Make a melee attack against a single target. On hit, they take 1d10 Energy damage and they must succeed on a Might saving throw or be pushed back 10 feet. This damage increases to 2d10 at Level 10, 3d10 at Level 15, and 4d10 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              10
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              2,
+              10
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              3,
+              10
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              4,
+              10
+            ]
+          }
+        ],
+        "type": "Energy"
+      }
+    },
+    {
+      "name": "Confront",
+      "activation": "React",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You present yourself to a foe as a more worthy opponent. As a reaction, you can take an attack for an ally within 5 feet of you. You take all effects of the attack including damage, status effects, and debuffs."
+    },
+    {
+      "name": "Whirling Hands",
+      "activation": "Act",
+      "stamina": 2,
+      "range": 5,
+      "description": "You focus your energy into the muscles in your arms and deliver a dizzying spin attack to all foes around you. Everyone within range must succeed on a Swiftness saving throw. On failure, they take 1d10 Energy damage. On success, they take half damage. This damage increases to 2d10 at Level 15 and 3d10 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              10
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              2,
+              10
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              3,
+              10
+            ]
+          }
+        ],
+        "type": "Energy"
+      }
+    },
+    {
+      "name": "Stun",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You focus your internal energy into a shockwave as you hit the ground. Everyone within range must succeed on a Swiftness saving throw. On failure, they are Disoriented until the end of their next turn. On success, they are immune to Disorient for the rest of this combat.",
+      "area": {
+        "size": 10,
+        "type": "Area"
+      }
+    },
+    {
+      "name": "Total Focus",
+      "activation": "Act",
+      "stamina": 3,
+      "range": 5,
+      "description": "You have complete mastery over your energy and channel it into a slow but devastating attack that crushes a single foe. Make a melee attack against a single target. On hit, they take 3d12 Energy damage and are knocked prone.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              3,
+              12
+            ]
+          }
+        ],
+        "type": "Energy"
+      }
+    },
+    {
+      "name": "Overdrive Burst",
+      "activation": "React",
+      "stamina": 3,
+      "range": 30,
+      "description": "You release stored energy within your body after a foe hits you fighting back. As a reaction, when you are hit with an attack you can explode with energy. Everyone of your choice within range must succeed on a Swiftness saving throw. On failure, they take 2d10 Energy damage. On success, they take half damage.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              2,
+              10
+            ]
+          }
+        ],
+        "type": "Energy"
+      }
+    },
+    {
+      "name": "Energy Transfer",
+      "activation": "Act",
+      "stamina": 5,
+      "range": 5,
+      "description": "Your mastery of energy allows you to tap into your own Vitality to transfer it into a vicious knockout attempt. Make a melee attack against a single target. On hit, they take Energy damage equal to an amount of your choice from 1 to 100 and you take this same amount of damage ignoring all Prescences you have."
+    }
+  ],
+  "Invulnerability": [
+    {
+      "name": "Resist Physical Damage",
+      "activation": "Automatic",
+      "stamina": 0,
+      "range": "Self",
+      "description": "You are naturally tough and resistant to physical attacks. You gain resistance to Physical damage taking half damage from those attacks."
+    },
+    {
+      "name": "Dull Pain",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You quickly dull the pain within yourself and heal a small amount. You regain 1d10 Hit Points. This healing increases to 2d10 at Level 5, 3d10 at Level 10, 4d10 at Level 15, and 5d10 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              10
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              2,
+              10
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              3,
+              10
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              4,
+              10
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              5,
+              10
+            ]
+          }
+        ],
+        "type": "Hit Points"
+      }
+    },
+    {
+      "name": "Temporary Invulnerability",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You tap into your inner invulnerability to gain extra defense. As an act, toggle this power you gain +3 to Defense. A toggled power remains active until you toggle it off as a free action, or you are held/slept/disoriented where it immediately drops."
+    },
+    {
+      "name": "Resist Elements",
+      "activation": "Automatic",
+      "stamina": 0,
+      "range": "Self",
+      "description": "You are naturally tough and resistant to elemental attacks. You gain resistances to Fire, Ice, Lightning, and Water damage taking half damage from those attacks."
+    },
+    {
+      "name": "Resist Energies",
+      "activation": "Automatic",
+      "stamina": 0,
+      "range": "Self",
+      "description": "You are naturally tough and resistant to energy attacks. You gain resistances to Energy and Force damage taking half damage from those attacks."
+    },
+    {
+      "name": "Unyielding",
+      "activation": "React",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You tap into your inner strength and shrug off a status effect immediately. As a reaction, when you are hit with an effect that makes you Immobilized, Held, Slept, Disoriented, Slowed, or Feared the effect is nullified."
+    },
+    {
+      "name": "Invincibility",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "Your natural defenses increase for each foe around you as your brace for impact. Each foe within range must succeed on a Vitality saving throw. On failure, you gain +1 Defense for each foe. On success, nothing happens.",
+      "area": {
+        "size": 10,
+        "type": "Area"
+      }
+    },
+    {
+      "name": "Resist Psionic",
+      "activation": "Automatic",
+      "stamina": 0,
+      "range": "Self",
+      "description": "You are naturally tough and resistant to elemental attacks. You gain resistance to Psychic damage taking half damage from those attacks."
+    },
+    {
+      "name": "Tough Mind",
+      "activation": "Act",
+      "stamina": 3,
+      "range": "Self",
+      "description": "You tap into your mind’s invulnerability to gain extra fortitude. As an act, toggle this power you gain +5 to Fortitude. A toggled power remains active until you toggle it off as a free action, or you are held/slept/disoriented where it immediately drops."
+    },
+    {
+      "name": "Unstoppable",
+      "activation": "Act",
+      "stamina": 5,
+      "range": "Self",
+      "description": "You become an unstoppable force for a short burst of time. For 1 minute, when you activate this power you gain +5 to Defense and Fortitude and gain resistance to Darkness, Luminous, Poison, and Sonic damage. After this minute is over you become Disoriented until the end of your next turn."
+    }
+  ],
+  "Radiation Aura": [
+    {
+      "name": "Alpha Barrier",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You cloak yourself in a field of protective radiation that grants an increase to defense. As an Act, toggle this power your Defense increases by 2. This increases as you level +3 at Level 5, +4 at Level 10, +5 at Level 15, and +6 at Level 20. A toggled power remains active until you toggle it off, or you are held/slept/disoriented."
+    },
+    {
+      "name": "Gamma Boost",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You increase the gamma within your body to boost your regeneration for a moment. As an Act, you heal 1d8 + Vitality hit points. This healing increases as you level 2d8 at Level 5, 3d8 at Level 10, 4d8 at Level 15, and 5d8 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              8
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              2,
+              8
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              3,
+              8
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              4,
+              8
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              5,
+              8
+            ]
+          }
+        ],
+        "type": "+ Vitality Hit Points"
+      }
+    },
+    {
+      "name": "Beta Barrier",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You cloak your mind in a protective shielding of radiation that grants an increase to fortitude. As an Act, toggle this power your Fortitude increases by +1. This increases as you level +2 at Level 5, +3 at Level 10, +4 at Level 15, and +5 at Level 20. A toggled power remains active until you toggle it off as a free action, or you are held/slept/disoriented where it immediately drops."
+    },
+    {
+      "name": "Proton Armor",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You quickly increase the amount of radiation around you to shield yourself from energy attacks. As an Act, toggle this power you gain resistance to Energy, Fire, Ice, Lightning, and Water damage taking half damage from attacks. A toggled power remains active until you toggle it off as a free action, or you are held/slept/disoriented where it immediately drops."
+    },
+    {
+      "name": "Fallout Shelter",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You flex a burst of radiation around you freeing yourself from all status effects. When you activate this power, as an Act, any status effect upon you is instantly ended, with the exception of Disoriented."
+    },
+    {
+      "name": "Radiation Therapy",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You concentrate your energies to harness a long term regeneration boost to mend your wounds closed. Make a melee attack against everyone within 5ft around you. On hit, each enemy takes 1d10 Energy damage and you regain Hit Points equal to the damage dealt.",
+      "area": {
+        "size": 5,
+        "type": "Area"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              10
+            ]
+          }
+        ],
+        "type": "Energy"
+      }
+    },
+    {
+      "name": "Decay",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You disperse a small amount of radiation in the area immediately around you slowly draining your foes. As an Act for 1 minute, you have an aura 10 feet around you. Any enemy within this aura when cast or if they end their turn within it take 1d8 Energy damage and get a -2 penalty on their to hit rolls and saving throws.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              8
+            ]
+          }
+        ],
+        "type": "Energy"
+      }
+    },
+    {
+      "name": "Particle Shielding",
+      "activation": "React",
+      "stamina": 3,
+      "range": "Self",
+      "description": "You channel a tremendous amount of radiation into a bubble around you. As a reaction, when hit with an attack you gain a protective bubble that grants you resistance to all damage until the start of your next turn including the triggering attack."
+    },
+    {
+      "name": "Ground Zero",
+      "activation": "Act",
+      "stamina": 3,
+      "range": "Self",
+      "description": "You release a mixture of radiation into the area, all nearby foes are barraged with harmful radiation and shredding their defenses. Make a melee attack against all targets within range, on hit they take 3d10 Energy damage and they get -4 Defense until the start of your next turn.",
+      "area": {
+        "size": 5,
+        "type": "Area"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              3,
+              10
+            ]
+          }
+        ],
+        "type": "Energy"
+      }
+    },
+    {
+      "name": "Total Meltdown",
+      "activation": "Act",
+      "stamina": 5,
+      "range": "Self",
+      "description": "After you build up a dangerous amount of radiation you release it as both a shield and to empower yourself. As an Act, until the start of your next turn, you gain +5 to Defense and Fortitude. Additionally, you gain +2 to your to hit and damage rolls for melee attacks."
+    }
   ]
 }
-
 );

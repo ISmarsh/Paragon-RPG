@@ -15,12 +15,12 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Earth Control",
-      "primary": false,
+      "primary": true,
       "secondary": false
     },
     {
       "name": "Electric Control",
-      "primary": false,
+      "primary": true,
       "secondary": false
     },
     {
@@ -102,8 +102,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Energy Melee",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Fire Melee",
@@ -420,8 +420,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Invulnerability",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Luminous Aura",
