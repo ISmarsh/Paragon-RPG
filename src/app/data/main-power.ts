@@ -452,7 +452,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "description": "You hurl a large fungal pod of spores at a single foe causing it to burst and effect those around them. Make a ranged attack against a single foe. On hit, they take 1d10 Physical damage, and everyone within 10 feet of them must succeed on a Vitality saving throw. On failure, they fall asleep.",
       "area": {
         "size": 10,
-        "type": "area"
+        "type": "Area"
       },
       "effectRoll": {
         "scale": [
@@ -505,7 +505,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "Hit Points"
+        "type": "Health"
       }
     },
     {
@@ -1237,7 +1237,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "Hit Points"
+        "type": "Health"
       }
     },
     {
@@ -2976,7 +2976,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "Hit Points"
+        "type": "Health"
       }
     },
     {
@@ -3092,7 +3092,7 @@ export const MainPowers = new CategoryIndex<MainPower>({
             ]
           }
         ],
-        "type": "+ Vitality Hit Points"
+        "type": "+ Vitality Health"
       }
     },
     {
@@ -3194,6 +3194,341 @@ export const MainPowers = new CategoryIndex<MainPower>({
       "stamina": 5,
       "range": "Self",
       "description": "After you build up a dangerous amount of radiation you release it as both a shield and to empower yourself. As an Act, until the start of your next turn, you gain +5 to Defense and Fortitude. Additionally, you gain +2 to your to hit and damage rolls for melee attacks."
+    }
+  ],
+  "Super Reflexes": [
+    {
+      "name": "Focused Fighting",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You become more focused in your combat prowess.  As an Act, toggle this power to increase your damage by +2 for all attacks. A toggled power remains active until you toggle it off as a free action, or you are held/slept/disoriented where it immediately drops."
+    },
+    {
+      "name": "Focused Senses",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You become more focused with your mind. As an Act, toggle this power to increase your Fortitude by +2. A toggled power remains active until you toggle it off as a free action, or you are held/slept/disoriented where it immediately drops. This increases to +3 at Level 5, +4 at Level 10, +5 at Level 15, and +6 at Level 20."
+    },
+    {
+      "name": "Focused Defenses",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You become more focused with your body. As an Act, toggle this power to increase your Defense by +2. A toggled power remains active until you toggle it off as a free action, or you are held/slept/disoriented where it immediately drops. This increases to +3 at Level 5, +4 at Level 10, +5 at Level 15, and +6 at Level 20."
+    },
+    {
+      "name": "Agile",
+      "activation": "Automatic",
+      "stamina": 0,
+      "range": "Self",
+      "description": "You are more naturally agile with your reflexes. You gain natural resistance to Physical attacks with your agile movements taking half damage from those attacks."
+    },
+    {
+      "name": "Practiced Brawler",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "Your training allows you to shrug off status effects as a practiced brawler. As an Act, you can end any Immobilize, Held, Slept, or Feared effect on yourself immediately."
+    },
+    {
+      "name": "Uncanny Dodge",
+      "activation": "React",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You use your ability to dodge out of danger to lessen the effects of an attack. As a Reaction, whenever you are hit with an attack you can half the damage done to you."
+    },
+    {
+      "name": "Quickness",
+      "activation": "Automatic",
+      "stamina": 0,
+      "range": "Self",
+      "description": "Your natural reflexes allow you to move quicker and resist slowing effects. You gain an additional 10ft of movement, gain a +3 bonus to Initiative rolls, and are immune to the Slowed condition."
+    },
+    {
+      "name": "Lucky",
+      "activation": "React",
+      "stamina": 3,
+      "range": "Self",
+      "description": "You use your steel mind to avoid all damage from a mental barrage. As a Reaction, when a foe has you make an Ego saving throw you can choose to automatically pass instead of rolling."
+    },
+    {
+      "name": "Evasion",
+      "activation": "React",
+      "stamina": 3,
+      "range": "Self",
+      "description": "You use your uncanny abilities to avoid all damage from an attack. As a Reaction, when a foe has you make a Swiftness saving throw you can choose to automatically pass instead of rolling."
+    },
+    {
+      "name": "Elude",
+      "activation": "Act",
+      "stamina": 5,
+      "range": "Self",
+      "description": "You improve your reflexes to a point of almost perfect avoidance. For 1 minute, you gain +10 to your Defense. This effect can only be used once per combat encounter."
+    }
+  ],
+  "Titan Weapon Fighting": [
+    {
+      "name": "Crushing Blow",
+      "activation": "Act",
+      "stamina": 1,
+      "range": 5,
+      "description": "You swing a vicious crushing blow at one foe. Make a melee attack against a single target. On hit, they take 1d10 Physical damage. This damage increases to 2d10 at Level 5, 3d10 at Level 10, 4d10 at Level 15, and 5d10 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              10
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              2,
+              10
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              3,
+              10
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              4,
+              10
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              5,
+              10
+            ]
+          }
+        ],
+        "type": "Physical"
+      }
+    },
+    {
+      "name": "Defensive Sweep",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You take a defensive stance and swipe out at all foes in front of you. Make a melee attack against everyone in range. On hit, they take 1d6 Physical damage and you gain +1 Defense until the start of your next turn. This damage increases to 2d6 at Level 5, 3d6 at Level 10, 4d6 at Level 15, and 5d6 at Level 20.",
+      "area": {
+        "size": 10,
+        "type": "Cone"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              6
+            ]
+          },
+          {
+            "level": 5,
+            "die": [
+              2,
+              6
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              3,
+              6
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              4,
+              6
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              5,
+              6
+            ]
+          }
+        ],
+        "type": "Physical"
+      }
+    },
+    {
+      "name": "Build Momentum",
+      "activation": "Act",
+      "stamina": 1,
+      "range": "Self",
+      "description": "You brace yourself to build momentum for your next brutal swing. As an Act, the next Titan Weapon attack you use is done with advantage and deals additional damage equal to your level."
+    },
+    {
+      "name": "Titan Sweep",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You make a sweeping slash hitting all foes around you. Everyone within range must succeed on a Swiftness saving throw. On failure, they take 1d10 Physical damage and are knocked prone. On success, they take half damage and are not knocked prone. This damage increases to 2d10 at Level 10, 3d10 at Level 15, and 4d10 at Level 20.",
+      "area": {
+        "size": 5,
+        "type": "Area"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              10
+            ]
+          },
+          {
+            "level": 10,
+            "die": [
+              2,
+              10
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              3,
+              10
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              4,
+              10
+            ]
+          }
+        ],
+        "type": "Physical"
+      }
+    },
+    {
+      "name": "Confront",
+      "activation": "React",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You present yourself to a foe as a more worthy opponent. As a reaction, you can take an attack for an ally within 5 feet of you. You take all effects of the attack including damage, status effects, and debuffs."
+    },
+    {
+      "name": "Follow Through",
+      "activation": "Act",
+      "stamina": 2,
+      "range": 5,
+      "description": "You follow through on your momentum to slam down on a single foe. Make a melee attack against a single target. On hit, they take 1d12 Physical damage and must succeed on a Might saving throw or be knocked prone. If this attack is used after using Build Momentum treat any d12 that would be rolled as a 12. This damage increases to 2d12 at Level 15 and 3d12 at Level 20.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              1,
+              12
+            ]
+          },
+          {
+            "level": 15,
+            "die": [
+              2,
+              12
+            ]
+          },
+          {
+            "level": 20,
+            "die": [
+              3,
+              12
+            ]
+          }
+        ],
+        "type": "Physical"
+      }
+    },
+    {
+      "name": "Vicious Windmill",
+      "activation": "Act",
+      "stamina": 2,
+      "range": "Self",
+      "description": "You twirl your weapon in a vicious windmill striking twice at each foe in front of you. Make a melee attack against everyone in range. On hit, they take 2d10 Physical damage and are knocked 5ft to the left or right and you occupy their former space. Moving out of their range does not provoke an opportunity attack.",
+      "area": {
+        "size": 20,
+        "type": "Line"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              2,
+              10
+            ]
+          }
+        ],
+        "type": "Physical"
+      }
+    },
+    {
+      "name": "Rend Armor",
+      "activation": "Act",
+      "stamina": 3,
+      "range": 5,
+      "description": "You batter a single foe with an armor shattering strike. Make a melee attack against a single target. On hit, they take 3d12 Physical damage and lose -3 Defense until the start of your next turn.",
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              3,
+              12
+            ]
+          }
+        ],
+        "type": "Physical"
+      }
+    },
+    {
+      "name": "Momentous Rebuttal",
+      "activation": "React",
+      "stamina": 3,
+      "range": 5,
+      "description": "You lash out at a foe with all your momentum as they strike you. As a Reaction, when hit with a melee attack while you are under the effects of Build Momentum you can strike back at the foe. Make a melee attack against them at advantage. On hit, they take 50 Physical damage and you lose your Build Momentum effect."
+    },
+    {
+      "name": "Arc of Destruction",
+      "activation": "Act",
+      "stamina": 5,
+      "range": "Self",
+      "description": "You step forward delivering a massive arc of destruction harming foes and knocking them down. As an Act, everyone in range must succeed on a Swiftness saving throw. On failure, take 4d12 Physical damage and are knocked prone. On success, they take half damage and are not knocked prone.",
+      "area": {
+        "size": 20,
+        "type": "Cone"
+      },
+      "effectRoll": {
+        "scale": [
+          {
+            "level": 1,
+            "die": [
+              4,
+              12
+            ]
+          }
+        ],
+        "type": "Physical"
+      }
     }
   ]
 }

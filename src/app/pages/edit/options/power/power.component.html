@@ -1,0 +1,98 @@
+
+<div class="row h-100">
+  <div class="col-12" [class.col-md-6]="power.minion">
+    <div class="card h-100">
+      <div class="card-header">
+        {{power.name}}
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">                    
+          <b>Range: </b>{{rangeDisplay()}}
+        </li>
+        <li class="list-group-item">
+          <b>Activation: </b>{{power.activation}}, {{power.stamina}} Stamina
+        </li>
+        <li class="list-group-item" *ngIf="power.effectRoll">
+          <b>Effect Roll: </b>{{effectRollDisplay()}}
+        </li>
+        <li class="list-group-item">
+          {{power.description}}
+        </li>
+      </ul>
+    </div>
+  </div>
+  
+  <div *ngIf="power.minion" class="col-12 pt-3 col-md-6 pt-md-0">
+    <div class="card h-100">
+      <div class="card-header">
+        Minion: {{power.minion.name}}
+      </div>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item px-0 d-flex justify-content-between">
+          <div class="d-flex justify-content-between w-50 px-3">
+            <b>Health</b>
+            {{power.minion.health}}
+          </div>
+          <div class="d-flex justify-content-between w-50 px-3">
+            <b>Speed</b>
+            {{power.minion.speed}}ft
+          </div>
+        </li>
+        <li class="list-group-item px-0 d-flex justify-content-between">
+          <div class="d-flex justify-content-between w-50 px-3">
+            <b>Defense</b>
+            {{power.minion.defense}}
+          </div>
+          <div class="d-flex justify-content-between w-50 px-3">                        
+            <b>Fortitude</b>
+            {{power.minion.fortitude}}
+          </div>
+        </li>
+        <li class="list-group-item px-0 d-flex justify-content-between">
+          <div class="d-flex justify-content-between w-50 px-3">
+            <b>MIG</b>
+            {{power.minion.might}}
+          </div>
+          <div class="d-flex justify-content-between w-50 px-3">
+            <b>SWI</b>
+            {{power.minion.swiftness}}
+          </div>
+          <div class="d-flex justify-content-between w-50 px-3">
+            <b>VIT</b>
+            {{power.minion.vitality}}
+          </div>
+        </li>
+        <li class="list-group-item px-0 d-flex justify-content-between">
+          <div class="d-flex justify-content-between w-50 px-3">
+            <b>INT</b>
+            {{power.minion.intelligence}}
+          </div>
+          <div class="d-flex justify-content-between w-50 px-3">
+            <b>EGO</b>
+            {{power.minion.ego}}
+          </div>
+          <div class="d-flex justify-content-between w-50 px-3">
+            <b>CHA</b>
+            {{power.minion.charisma}}
+          </div>
+        </li>
+        <li class="list-group-item px-0 d-flex justify-content-between">
+          <div class="d-flex justify-content-between w-100 px-3">
+            <b>Weaknesses</b>
+            {{power.minion.weaknesses}}
+          </div>
+        </li>
+        <li class="list-group-item px-0 d-flex justify-content-between">
+          <div class="d-flex justify-content-between w-100 px-3">
+            <b>Presences</b>
+            {{power.minion.presences}}
+          </div>
+        </li>
+        <li class="list-group-item px-3">
+          <b>Acts:</b>
+          <div *ngFor="let act of power.minion.acts">{{act}}</div>
+        </li>
+      </ul>
+    </div>
+  </div>
+  </div>

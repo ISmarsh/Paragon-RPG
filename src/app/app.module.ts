@@ -11,6 +11,8 @@ import { EditComponent } from './pages/edit/edit.component';
 import { OptionsComponent } from './pages/edit/options/options.component';
 import { StatsComponent } from './pages/edit/stats/stats.component';
 import { PersonalComponent } from './pages/edit/personal/personal.component';
+import { PowerComponent } from './pages/edit/options/power/power.component';
+import { PowerDisplayPipe } from './pages/edit/options/power-display.pipe';
 
 const routes: Routes = [
   { path: '', redirectTo: '/edit/options', pathMatch: 'full' },
@@ -34,6 +36,8 @@ const routes: Routes = [
     OptionsComponent,
     StatsComponent,
     PersonalComponent,
+    PowerComponent,
+    PowerDisplayPipe,
   ],
   imports: [
     RouterModule.forRoot(routes),

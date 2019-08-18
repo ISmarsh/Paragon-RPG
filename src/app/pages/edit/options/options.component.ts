@@ -12,6 +12,8 @@ import { EditComponent } from '../edit.component';
 import { AncillaryPowers } from 'src/app/data/ancillary-power';
 import { Stats } from 'src/app/data/stat';
 import { SkillMap } from 'src/app/data/stat-skill-map';
+import { MainPower } from 'src/app/data/main-power';
+import { TitleCasePipe } from '@angular/common';
 
 @Component({
   selector: 'app-options',
@@ -34,6 +36,32 @@ export class OptionsComponent extends EditComponent implements OnInit, OnDestroy
   ancillaryPowers = AncillaryPowers;
   stats = Stats;
   skillMap = SkillMap;
+
+  rangeDisplay(power: MainPower): string {
+    var display = power.range.toString();
+
+    if (typeof power.range === "number") display += "ft";
+
+    if (power.area) {
+      display += ` (${power.area.size}ft ${power.area.type})`;
+    }
+
+    return display;
+  }
+
+  effectRollDisplay(power: MainPower): string {
+    if (!power.effectRoll) return '';
+
+    var scale = (power.effectRoll.scale.concat([])).reverse().find(s => s.level <= this.character.level)    
+
+    var display = `${scale.die[0]}d${scale.die[1]}`;
+
+    if (power.effectRoll.type) {
+      display += ` ${power.effectRoll.type}`;
+    }
+
+    return display;
+  }
 
   ngOnDestroy(): void {
     super.ngOnDestroy();

@@ -14,7 +14,6 @@ import { MainPower, MainPowers } from '../data/main-power';
 import { AncillaryPower, AncillaryPowers } from '../data/ancillary-power';
 import { Progression, Level } from '../data/leveling';
 import { Features } from '../core/enums';
-import { TitleCasePipe } from '@angular/common';
 
 @jsonObject
 @Reflect.metadata("name", "Character")
@@ -27,22 +26,17 @@ export class Character extends Entity {
   set level(value: number) {
     this._level = Math.min(Math.max(1, value), 30);
 
-    var ancillaryCount = (this.levelFeatures[Features.Ancillary] || []).length;
+    var ancillaryCount = Progression.slice(0, this.level).reduce((count, level) => {
+      if (level[Features.Ancillary]) count++;
+
+      return count;
+    }, 0);
     this.ancillaryPowers = this.ancillaryPowers.concat(
       new Array<AncillaryPower>(ancillaryCount)
     );
     this.ancillaryPowers.splice(ancillaryCount);
   }
   get proficiency(): number { return 2 + Math.floor((this.level - 1) / 4); }
-  get levelFeatures(): Level {
-    return Progression.slice(0, this.level).reduce((a, b) => {
-      for (let key in b) {
-        a[key] = (a[key] || []).concat(b[key]);
-      }
-
-      return a;
-    }, (<Level>{}));
-  }
 
   @jsonDataMember(Origins)
   private _origin?: Origin;
@@ -145,46 +139,24 @@ export class Character extends Entity {
 
   @jsonDataMember(PowerSets)
   primaryPowerSet?: PowerSet;
-  public primaryPowers(): MainPower[] {
-    if (!this.primaryPowerSet) return [];
-
-    var primarySet = MainPowers.byCategory[this.primaryPowerSet.name];
-
-    return this.levelFeatures[Features.PrimaryPower].map((i: number) => primarySet[i - 1]);
-  }
 
   @jsonDataMember(PowerSets)
   secondaryPowerSet?: PowerSet;
-  public secondaryPowers(): MainPower[] {
-    if (!this.secondaryPowerSet) return [];
 
+  public mainPowers(): MainPower[] {
+    if (!(this.primaryPowerSet && this.secondaryPowerSet)) return [];
+
+    var primarySet = MainPowers.byCategory[this.primaryPowerSet.name];
     var secondarySet = MainPowers.byCategory[this.secondaryPowerSet.name];
 
-    return this.levelFeatures[Features.SecondaryPower].map((i: number) => secondarySet[i - 1]);
-  }
+    return Progression.slice(0, this.level).reduce((array, level) => {
+      array.push(
+        ...[].concat(level[Features.PrimaryPower] || []).map((i: number) => primarySet[i - 1]),
+        ...[].concat(level[Features.SecondaryPower] || []).map((i: number) => secondarySet[i - 1]),
+      );
 
-  rangeDisplay(power: MainPower): string {
-    var display = power.range.toString();
-
-    if (typeof power.range === "number") display += "ft";
-
-    if (power.area) {
-      display += ` (${power.area.size}ft ${new TitleCasePipe().transform(power.area.type)})`;
-    }
-
-    return display;
-  }
-
-  effectRollDisplay(power: MainPower): string {
-    var scale = (power.effectRoll.scale.concat([])).reverse().find(s => s.level <= this.level)
-
-    var display = `${scale.die[0]}d${scale.die[1]}`;
-
-    if (power.effectRoll.type) {
-      display += ` ${power.effectRoll.type}`;
-    }
-
-    return display;
+      return array;
+    }, new Array<MainPower>())
   }
 
   @jsonDataMember(TraversalPowers)
@@ -209,7 +181,9 @@ export class Character extends Entity {
     for (let i = 0; i < this.ancillaryPowers.length; i++) {
       const ancillary = this.ancillaryPowers[i];
 
-      if (ancillary.statIncrease["Choose"]) {
+      if (!ancillary) continue;
+
+      if (ancillary.statIncrease && ancillary.statIncrease["Choose"]) {
         ancillary.statIncrease["Choose"].forEach(increase => {
           if ((this.ancillaryStats[i] || {})[increase] === stat) {
             statIncrease += increase;
