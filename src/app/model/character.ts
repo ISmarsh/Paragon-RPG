@@ -242,6 +242,10 @@ export class Character extends Entity {
 
   get fortitude(): number { return 8 + this.getMod("Ego"); }
 
+  @jsonMember miscellaneous: {
+    [key: string]: { base: string | number, mod: number, type: StatName, proficient?: boolean }
+  } = {};
+
   @jsonMember realName?: string;
   @jsonMember hometown?: string;
   @jsonMember dayJob?: string;

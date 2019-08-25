@@ -26,3 +26,8 @@ label.custom-control-label:empty {
     content: '+';
   }
 }
+
+td.shrink, th.shrink {
+  width: 1px;
+  white-space: nowrap;
+}

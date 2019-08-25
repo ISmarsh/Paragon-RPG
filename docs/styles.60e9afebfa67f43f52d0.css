@@ -1,4 +1,4 @@
-@charset "UTF-8";.card-header,label,option,select{font-weight:700!important}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}label.custom-control-label:empty::after,label.custom-control-label:empty::before{left:-1.25rem}.mod{margin-left:-1ch!important}.mod.negative::before{content:"-"}.mod:not(.negative)::before{content:"+"}/*!
+@charset "UTF-8";.card-header,label,option,select{font-weight:700!important}input[type=number]::-webkit-inner-spin-button,input[type=number]::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}label.custom-control-label:empty::after,label.custom-control-label:empty::before{left:-1.25rem}.mod{margin-left:-1ch!important}.mod.negative::before{content:"-"}.mod:not(.negative)::before{content:"+"}td.shrink,th.shrink{width:1px;white-space:nowrap}/*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
  * Copyright 2011-2019 Twitter, Inc.

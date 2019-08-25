@@ -36,7 +36,7 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
     this.characterForm.form.valueChanges.subscribe({
       next: () => {
         //After the change has been applied, save.
-        setTimeout(() => Repository.save(Character, this.character))
+        setTimeout(() => this.save())
       }
     });
   }
@@ -48,6 +48,10 @@ export class EditComponent implements OnInit, AfterViewInit, OnDestroy {
   characterForm: NgForm;
 
   progression = Progression;
+
+  protected save() {
+    return Repository.save(Character, this.character);
+  }
 
   public up(): void {
     var scrollTargets = document.querySelectorAll("[data-scroll-target]");
