@@ -58,20 +58,28 @@ export class StatsComponent extends EditComponent implements OnInit, OnDestroy {
   getMiscValue(key: string) {
     let misc = this.character.miscellaneous[key];
 
-    if (typeof misc.base === "number") {
-      return +misc.base + misc.mod;
+    let base: string | number, isString: boolean;
+    if (misc.base !== undefined) {
+      base = misc.base;
+      
+      if (isString = typeof misc.base === "string") {
+        base += " ";
+      }
+    } else {
+      base = "";
+
+      isString = true;
     }
 
     let mod = misc.mod;
     if (misc.type) {
-      mod += this.character.getMod(misc.type)
-
-      if (misc.proficient) {
-        mod += this.character.proficiency;
-      }
+      mod += this.character.getMod(misc.type);
+    }
+    if (misc.proficient) {
+      mod += this.character.proficiency;
     }
 
-    return `${misc.base} ${mod >= 0 ? '+' : '-'} ${Math.abs(mod)}`;
+    return isString ? base + `${mod >= 0 ? '+' : '-'} ${Math.abs(mod)}` : +base + mod;
   }
   removeMisc(key: string): void {
     delete this.character.miscellaneous[key];

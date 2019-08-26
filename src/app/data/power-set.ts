@@ -157,8 +157,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Titan Weapon Fighting",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Weapon Fighting",
@@ -450,8 +450,8 @@ export const PowerSets = new CategoryIndex<PowerSet>({
     },
     {
       "name": "Super Reflexes",
-      "primary": false,
-      "secondary": false
+      "primary": true,
+      "secondary": true
     },
     {
       "name": "Willpower",
