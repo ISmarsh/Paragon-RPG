@@ -2,7 +2,7 @@ name: CI
 on: [push]
 jobs:
   build:
-    runs-on: [ubuntu-latest]  
+    runs-on: [windows-latest]  
 
     steps:
     - uses: actions/checkout@v2-beta
@@ -13,9 +13,7 @@ jobs:
     - run: npm install
     - run: npm run build
 
-    - name: commit    
-      run: |
-        git config --global user.name "Sam Marsh"
-        git config --global user.email "ISmarsh@users.noreply.github.com"
-        git commit -am "auto-build"
-        git push
+    - run: git config --global user.name "Sam Marsh"
+    - run: git config --global user.email "ISmarsh@users.noreply.github.com"
+    - run: git commit -am "auto-build"
+    - run: git push
