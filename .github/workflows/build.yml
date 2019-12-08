@@ -1,27 +1,22 @@
 name: CI
-
 on: [push]
-
 jobs:
   build:
-
     runs-on: [windows-latest]  
 
     steps:
-    - uses: mayur-rawte/github-angular-actions@latest
-    - uses: actions/checkout@v2-beta
-
-    - name: npm      
+    - name: npm install
       uses: bahmutov/npm-install@v1.1.0
       with: 
         useLockFile: false
-    - name: build
-      run: |
-        ng build --prod --output-path docs --base-href /paragon-rpg/
-        & copy docs\\index.html docs\\404.html
+
+    - name: npm build
+      run: npm run build
+
     - name: commit
+      uses: actions/checkout@v2-beta
       run: |
+        git config --global user.name "Sam Marsh"
         git config --global user.email "ISmarsh@users.noreply.github.com"
-        git config --global user.name "auto-build"
-        git commit -am "build"
+        git commit -am "auto-build"
         git push
