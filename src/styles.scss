@@ -15,6 +15,10 @@
   color: white;
 }
 
+.input-group select, .input-group option {
+  font-weight: normal !important;
+}
+
 label, select, option, .card-header {
   font-weight: bold !important;
 }

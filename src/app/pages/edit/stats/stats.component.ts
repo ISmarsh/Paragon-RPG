@@ -34,7 +34,7 @@ export class StatsComponent extends EditComponent implements OnInit, OnDestroy {
   }
   saveMisc(): void {
     if (this.misc.name) {
-      let isString = /[^0-9]/.test(this.misc.base);
+      let isString = (this.misc.base || "").length === 0 || /[^0-9]/.test(this.misc.base);
 
       this.character.miscellaneous[this.misc.name] = {
         base: isString ? this.misc.base : +this.misc.base,

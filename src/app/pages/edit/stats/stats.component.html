@@ -131,14 +131,14 @@
                 </tr>
                 <tr>                  
                   <td class="w-25">
-                    <input name="miscName" class="form-control form-control-sm" [(ngModel)]="misc.name">
+                    <input name="miscName" placeholder="Name" class="form-control form-control-sm" [(ngModel)]="misc.name">
                   </td>
                   <td>
                     <div class="input-group input-group-sm">
-                      <input name="miscValue" class="form-control" [(ngModel)]="misc.base">
+                      <input name="miscValue" placeholder="Base" class="form-control" [(ngModel)]="misc.base">
                       <select name="miscType" class="form-control" [(ngModel)]="misc.type">
-                        <option [ngValue]="undefined" selected></option>
-                        <option *ngFor="let type of miscTypes" [ngValue]="type">{{type}}</option>
+                        <option [ngValue]="undefined" selected>No Stat</option>
+                        <option *ngFor="let type of miscTypes" [ngValue]="type">+ {{type}}</option>
                       </select>
                       <div class="input-group-append">
                         <div class="input-group-text">
