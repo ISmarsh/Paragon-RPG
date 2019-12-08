@@ -5,16 +5,15 @@ jobs:
     runs-on: [windows-latest]  
 
     steps:
-    - name: npm install
-      uses: bahmutov/npm-install@v1.1.0
-      with: 
-        useLockFile: false
+    - uses: actions/checkout@v2-beta
+    - uses: actions/setup-node@v1
+      with:
+        node-version: '10.x'
+    
+    - run: npm install
+    - run: npm run build
 
-    - name: npm build
-      run: npm run build
-
-    - name: commit
-      uses: actions/checkout@v2-beta
+    - name: commit    
       run: |
         git config --global user.name "Sam Marsh"
         git config --global user.email "ISmarsh@users.noreply.github.com"
