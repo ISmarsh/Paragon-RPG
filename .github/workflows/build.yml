@@ -9,11 +9,12 @@ jobs:
 
     steps:
     - uses: mayur-rawte/github-angular-actions@latest
-    - uses: bahmutov/npm-install@v1.1.0
-    - uses: actions/checkout@v1
+    - uses: actions/checkout@v2-beta
 
-    - name: npm
-      run: npm ci
+    - name: npm      
+      uses: bahmutov/npm-install@v1.1.0
+      with: 
+        useLockFile: false
     - name: build
       run: |
         ng build --prod --output-path docs --base-href /paragon-rpg/
