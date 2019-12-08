@@ -6,6 +6,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2-beta
+      with:
+        token: ${{ secrets.PAT }}
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
@@ -16,5 +18,7 @@ jobs:
     - run: git config --global user.name "Sam Marsh"
     - run: git config --global user.email "ISmarsh@users.noreply.github.com"
     - run: git add -A
-    - run: git commit -m "auto-build"
+    - run: git commit -m "Auto-Build"
     - run: git push
+
+    
