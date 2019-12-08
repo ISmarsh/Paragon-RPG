@@ -1,4 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+@import "../node_modules/bootstrap/scss/functions";
+@import "../node_modules/bootstrap/scss/variables";
+
+.nav-link {
+  border-bottom-width: 0px !important;
+
+  &:not(.active) {
+    color: white;
+  }
+}
+
+.card-header { 
+  background-color: $primary !important;
+  color: white;
+}
 
 label, select, option, .card-header {
   font-weight: bold !important;
