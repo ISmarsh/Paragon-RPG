@@ -1,0 +1,22 @@
+name: CI
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: [windows-latest]  
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: mayur-rawte/github-angular-actions@latest
+
+    - name: build
+      run: |
+        ng build --prod --output-path docs --base-href /paragon-rpg/
+        && copy docs\\index.html docs\\404.html
+    - name: commit
+      run: |
+        git config --global user.name "auto-build"
+        git commit -am "build"
+        git push
