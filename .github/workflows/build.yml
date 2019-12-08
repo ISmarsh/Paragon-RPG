@@ -15,5 +15,6 @@ jobs:
 
     - run: git config --global user.name "Sam Marsh"
     - run: git config --global user.email "ISmarsh@users.noreply.github.com"
-    - run: git commit -am "auto-build"
+    - run: git add -A
+    - run: git commit -m "auto-build"
     - run: git push
