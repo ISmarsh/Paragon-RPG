@@ -14,6 +14,7 @@ import { MainPower, MainPowers } from '../data/main-power';
 import { AncillaryPower, AncillaryPowers } from '../data/ancillary-power';
 import { Progression, Level } from '../data/leveling';
 import { Features } from '../core/enums';
+import { Repository } from './repository';
 
 @jsonObject
 @Reflect.metadata("name", "Character")
@@ -59,6 +60,8 @@ export class Character extends Entity {
     else if (to && to.length) {
       this.originSkills.push(to);
     }
+
+    Repository.save(Character, this);
   }
   public getOriginSkills(): string[] {
     const array = this.originSkills.concat(new Array<string>(this.origin.proficiencyCount));

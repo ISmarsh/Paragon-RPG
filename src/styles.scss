@@ -2,17 +2,22 @@
 @import "../node_modules/bootstrap/scss/functions";
 @import "../node_modules/bootstrap/scss/variables";
 
+body {
+  background-color: $secondary !important;
+}
+
 .nav-link {
+  color: white !important;
   border-bottom-width: 0px !important;
 
-  &:not(.active) {
-    color: white;
+  &.active {
+    background-color: $secondary !important;
   }
 }
 
 .card-header { 
+  color: white !important;
   background-color: $primary !important;
-  color: white;
 }
 
 .input-group select, .input-group option {

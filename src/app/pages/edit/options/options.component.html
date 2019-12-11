@@ -1,7 +1,7 @@
 <form>
   <div class="row">
     <div class="col-md-6">
-      <div class="card form-group" data-scroll-target>
+      <div class="card mb-3" data-scroll-target>
         <div class="card-header">
           Origin
         </div>
@@ -56,34 +56,30 @@
         </ul>
       </div>
       
-      <div class="card form-group" data-scroll-target>
+      <div class="card mb-3" data-scroll-target>
         <div class="card-header text-center">
           Weakness and Presence
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">
-            <div class="form-group mb-2">
-              <label for="weakness">Weakness (Damage &times;2)</label>
-              <select id="weakness" name="weakness" [(ngModel)]="character.weakness" class="form-control">
-                <option *ngFor="let type of damageTypes | filter:[character.presence]" [ngValue]="type">{{type.name}}</option>
-              </select>
-            </div>    
-            <div *ngIf="character.weakness">{{character.weakness.description}}</div>
+          <li class="list-group-item">            
+            <label for="weakness">Weakness (Damage &times;2)</label>
+            <select id="weakness" name="weakness" [(ngModel)]="character.weakness" class="form-control">
+              <option *ngFor="let type of damageTypes | filter:[character.presence]" [ngValue]="type">{{type.name}}</option>
+            </select>              
+            <div *ngIf="character.weakness" class="mt-2">{{character.weakness.description}}</div>
           </li>
-          <li class="list-group-item">
-            <div class="form-group mb-2">
-              <label for="presence">Presence (Damage &times;0)</label>
-              <select id="presence" name="presence" [(ngModel)]="character.presence" class="form-control">
-                <option *ngFor="let type of damageTypes | filter:[damageTypes.byName['Physical'], character.weakness]" [ngValue]="type">{{type.name}}</option>
-              </select>
-            </div>
-            <div *ngIf="character.presence">{{character.presence.description}}</div>
+          <li class="list-group-item">            
+            <label for="presence">Presence (Damage &times;0)</label>
+            <select id="presence" name="presence" [(ngModel)]="character.presence" class="form-control">
+              <option *ngFor="let type of damageTypes | filter:[damageTypes.byName['Physical'], character.weakness]" [ngValue]="type">{{type.name}}</option>
+            </select>          
+            <div *ngIf="character.presence" class="mt-2">{{character.presence.description}}</div>
           </li>
         </ul>
       </div>
     </div>
     <div class="col-md-6">
-      <div class="card form-group" data-scroll-target>
+      <div class="card mb-3" data-scroll-target>
         <div class="card-header">
           Alignment
         </div>
@@ -97,7 +93,7 @@
         </div>
       </div>
       
-      <div class="card form-group" data-scroll-target>
+      <div class="card mb-3" data-scroll-target>
         <div class="card-header">
           Archetype
         </div>
@@ -143,7 +139,7 @@
         </ul>
       </div>
 
-      <div class="card form-group" data-scroll-target>
+      <div class="card mb-3" data-scroll-target>
         <div class="card-header">
           Traversal
         </div>
@@ -165,7 +161,7 @@
 
   <div class="row">
     <div class="col-md-6" *ngFor="let power of character.ancillaryPowers; index as i">
-      <div class="card form-group">
+      <div class="card mb-3">
         <div class="card-header">
           Ancillary Power
         </div>
@@ -180,15 +176,13 @@
           </li>          
           <li class="list-group-item" *ngIf="((character.ancillaryPowers[i] || {})['statIncrease'] || {})['Choose']">
             <div class="row">
-              <div class="col-6" *ngFor="let increase of character.ancillaryPowers[i].statIncrease['Choose']">
-                <div class="form-group mb-0">
-                    <label for="ancillary{{i}}increase{{increase}}">Increase by {{increase}}</label>
-                    <select class="form-control" name="ancillary{{i}}increase{{increase}}"
-                      [ngModel]="(character.ancillaryStats[i] || {})[increase]"
-                      (ngModelChange)="character.setIncrease(i, increase, $event)">
-                      <option *ngFor="let stat of stats" [ngValue]="stat.name">{{stat.name}}</option>
-                    </select>
-                  </div>
+              <div class="col-6" *ngFor="let increase of character.ancillaryPowers[i].statIncrease['Choose']">                
+                  <label for="ancillary{{i}}increase{{increase}}">Increase by {{increase}}</label>
+                  <select class="form-control" name="ancillary{{i}}increase{{increase}}"
+                    [ngModel]="(character.ancillaryStats[i] || {})[increase]"
+                    (ngModelChange)="character.setIncrease(i, increase, $event)">
+                    <option *ngFor="let stat of stats" [ngValue]="stat.name">{{stat.name}}</option>
+                  </select>                
               </div>
             </div>
           </li>          
@@ -205,24 +199,9 @@
     </div>
   </div>
 
-  <!-- <ng-container *ngFor="let tuple of [['Primary Powers', character.primaryPowers()], ['Secondary Powers', character.secondaryPowers()]]"> -->
-    <!-- <div class="row">
-      <div class="col">
-        <div class="card form-group" *ngIf="tuple[1].length" data-scroll-target>
-          <div class="card-header">
-            {{tuple[0]}}
-          </div>
-          <div class="card-body pt-0 px-4 pb-3"> -->
-            <ng-container *ngFor="let row of character.mainPowers() | powerDisplayRows; index as i">
-              <div class="row form-group">
-                <div *ngFor="let power of row" class="col-12" [class.col-md-6]="row.length > 1">
-                  <app-power [power]="power" [level]="character.level"></app-power>
-        </div>
-      </div>
-    </ng-container>
-          <!-- </div>
-        </div>
+  <div class="row" *ngFor="let row of character.mainPowers() | powerDisplayRows; index as i" data-scroll-target>
+    <div *ngFor="let power of row" class="mb-3 col-12" [class.col-md-6]="row.length > 1">
+      <app-power [power]="power" [level]="character.level"></app-power>
+    </div>
   </div>
-    </div> -->
-  <!-- </ng-container> -->
 </form>
